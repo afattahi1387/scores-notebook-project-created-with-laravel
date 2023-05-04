@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
 Route::get('/login', 'MainController@login')->name('login');
