@@ -8,7 +8,7 @@ class MainController extends Controller
 {
     public function login() {
         if(auth()->check()) {
-            return 'slam';
+            return redirect()->route('dashboard');
         }
 
         return view('auth.login');
