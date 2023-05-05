@@ -10,6 +10,14 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
+    public function redirect_to_dashboard() {
+        if(auth()->user()->type == 'teacher') {
+            return redirect()->route('dashboard');
+        } else {
+            return 'salam';
+        }
+    }
+
     public function dashboard() {
         return view('dashboard.dashboard');
     }

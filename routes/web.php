@@ -15,4 +15,6 @@ Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
 Route::get('/login', 'MainController@login')->name('login');
 
+Route::get('/redirect-to-dashboard', 'DashboardController@redirect_to_dashboard')->name('redirect.to.dashboard');
+
 Auth::routes();
