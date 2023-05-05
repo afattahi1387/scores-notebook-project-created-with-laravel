@@ -14,7 +14,6 @@ class CreateRelationsTable extends Migration
     public function up()
     {
         Schema::create('relations', function (Blueprint $table) {
-            $table->bigInteger('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('lesson_room_id');
