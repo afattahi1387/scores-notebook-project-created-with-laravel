@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Relation extends Model
+class Learner extends Model
 {
     //
 }
