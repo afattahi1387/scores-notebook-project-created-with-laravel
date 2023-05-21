@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -19,6 +20,8 @@ class DashboardController extends Controller
     }
 
     public function dashboard() {
-        return view('dashboard.dashboard');
+        $user = User::find(auth()->user()->id);
+        $lesson_rooms = $user->lesson_rooms();
+        return view('dashboard.dashboard', ['lesson_rooms' => $lesson_rooms]);
     }
 }

@@ -174,30 +174,27 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                <i class="fas fa-list"></i>
+                                کلاس ها
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>ردیف</th>
+                                            <th>نام</th>
+                                            <th>عملیات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                        @php $counter = 0; @endphp
+                                        @foreach($lesson_rooms as $lesson_room)
+                                            <tr>
+                                                <td>@php echo ++$counter; @endphp</td>
+                                                <td>{{ $lesson_room['class_name'] }} - {{ $lesson_room['lesson_name'] }}</td>
+                                                <td>amaliat</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
