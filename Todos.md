@@ -1,1 +1,4 @@
 - [ ] set redirect to dashboard page.
+- [ ] set add date validations.
+- [ ] check migrations.
+- [ ] change add PN in add date page.
