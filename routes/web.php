@@ -15,7 +15,13 @@ Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
 Route::get('/login', 'MainController@login')->name('login');
 
-Route::get('/redirect-to-dashboard', 'DashboardController@redirect_to_dashboard')->name('redirect.to.dashboard');
+Route::get('/redirect-to-dashboard', function() {
+    if(auth()->user()->type == 'teacher') {
+        return redirect()->route('dashboard');
+    } else {
+        return redirect()->route('admins.dashboard');
+    }
+})->middleware('auth')->name('redirect.to.dashboard');
 
 Auth::routes();
 
@@ -25,4 +31,8 @@ Route::prefix('panel')->group(function() {
     Route::post('/insert-date/{lesson_room}/{lesson}', 'DashboardController@insert_date')->name('insert.date');
 
     Route::get('/show-students-list/{lesson_room}/{lesson}', 'DashboardController@show_students_list')->name('show.students.list');
+});
+
+Route::prefix('admins')->group(function() {
+    Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
 });

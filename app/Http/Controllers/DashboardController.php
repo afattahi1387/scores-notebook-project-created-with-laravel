@@ -10,20 +10,13 @@ use App\LessonRoom;
 use App\RelationShip;
 use App\StudentAttendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AddDateRequest;
 
 class DashboardController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
-    }
-
-    public function redirect_to_dashboard() {
-        if(auth()->user()->type == 'teacher') {
-            return redirect()->route('dashboard');
-        } else {
-            return 'salam';
-        }
     }
 
     public function dashboard() {
