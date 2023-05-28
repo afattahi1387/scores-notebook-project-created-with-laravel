@@ -2,3 +2,10 @@
 - [ ] set add date validations.
 - [ ] check migrations.
 - [ ] change add PN in add date page.
+- [ ] find hash for register user.
+- [ ] no access to dashboards.
+- [ ] set redirect to dashboard.
+- [ ] delete work additions.
+- [ ] seperate admins dashboard html structure and teachers dashboard html structure.
+- [ ] check fontawesome icons.
+- [ ] change pages direction.
