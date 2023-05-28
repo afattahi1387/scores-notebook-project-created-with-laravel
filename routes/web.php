@@ -18,3 +18,9 @@ Route::get('/login', 'MainController@login')->name('login');
 Route::get('/redirect-to-dashboard', 'DashboardController@redirect_to_dashboard')->name('redirect.to.dashboard');
 
 Auth::routes();
+
+Route::prefix('panel')->group(function() {
+    Route::get('/add-date/{lesson_room}/{lesson}', 'DashboardController@add_date')->name('add.date');
+
+    Route::post('/insert-date/{lesson_room}/{lesson}', 'DashboardController@insert_date')->name('insert.date');
+});

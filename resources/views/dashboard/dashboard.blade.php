@@ -3,7 +3,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1><br>
+                <h1 class="mt-4">داشبورد</h1><br>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
@@ -82,7 +82,9 @@
                                     <tr>
                                         <td>@php echo ++$counter; @endphp</td>
                                         <td>{{ $lesson_room['class_name'] }} - {{ $lesson_room['lesson_name'] }}</td>
-                                        <td>amaliat</td>
+                                        <td>
+                                            <a href="{{ route('add.date', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-success">افزودن تاریخ</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
