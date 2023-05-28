@@ -84,6 +84,7 @@
                                         <td>{{ $lesson_room['class_name'] }} - {{ $lesson_room['lesson_name'] }}</td>
                                         <td>
                                             <a href="{{ route('add.date', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-success">افزودن تاریخ</a>
+                                            <a href="{{ route('show.students.list', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-primary">مشاهده لیست دانش آموزان</a>
                                         </td>
                                     </tr>
                                 @endforeach

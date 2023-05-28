@@ -23,4 +23,6 @@ Route::prefix('panel')->group(function() {
     Route::get('/add-date/{lesson_room}/{lesson}', 'DashboardController@add_date')->name('add.date');
 
     Route::post('/insert-date/{lesson_room}/{lesson}', 'DashboardController@insert_date')->name('insert.date');
+
+    Route::get('/show-students-list/{lesson_room}/{lesson}', 'DashboardController@show_students_list')->name('show.students.list');
 });

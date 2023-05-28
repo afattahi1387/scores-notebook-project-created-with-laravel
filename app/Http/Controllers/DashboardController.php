@@ -96,4 +96,8 @@ class DashboardController extends Controller
             return redirect()->route('dashboard');
         }
     }
+
+    public function show_students_list(LessonRoom $lesson_room, Lesson $lesson) {
+        return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners]);
+    }
 }
