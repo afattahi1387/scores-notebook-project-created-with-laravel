@@ -9,3 +9,5 @@
 - [ ] seperate admins dashboard html structure and teachers dashboard html structure.
 - [ ] check fontawesome icons.
 - [ ] change pages direction.
+- [ ] change dashboards sidebar.
+- [ ] create delete lesson rooms and lessons in admins dashboard.
