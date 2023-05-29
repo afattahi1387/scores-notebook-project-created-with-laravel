@@ -50,22 +50,30 @@
                                 کلاس ها
                             </div>
                             <div class="card-body" style="direction: rtl;">
-                                <form action="" method="POST">
-                                    <div class="input-group">
-                                        @if(isset($_GET['edit-lesson-room']) && !empty($_GET['edit-lesson-room']))
-                                            <input type="text" name="lesson_room_name" class="form-control" placeholder="نام کلاس" style="margin-left: 3px;" required>
+                                @if(isset($_GET['edit-lesson-room']) && !empty($_GET['edit-lesson-room']))
+                                    <form action="{{ route('update.lesson.room', ['lesson_room' => $_GET['edit-lesson-room']]) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="put">
+                                        <div class="input-group">
+                                            <input type="text" name="name" class="form-control" placeholder="نام کلاس" value="{{ $lesson_room_name }}" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-warning" style="border-radius: 3px; color: white;"><i class="fas fa-edit"></i></button>
-                                        @else
-                                            <input type="text" name="lesson_room_name" class="form-control" placeholder="نام کلاس" style="margin-left: 3px;" required>
+                                        </div>
+                                    </form>
+                                @else
+                                    <form action="{{ route('insert.lesson.room') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <div class="input-group">
+                                            <input type="text" name="name" class="form-control" placeholder="نام کلاس" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i></button>
-                                        @endif
-                                    </div><br>
-                                    <ul>
-                                        @foreach($lesson_rooms as $lesson_room)
-                                            <li>{{ $lesson_room->name }} | <a href="#" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>
-                                        @endforeach
-                                    </ul>
-                                </form>
+                                        </div>
+                                    </form>
+                                @endif
+                                <br>
+                                <ul>
+                                    @foreach($lesson_rooms as $lesson_room)
+                                        <li>{{ $lesson_room->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson-room={{ $lesson_room->id }}" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -76,16 +84,24 @@
                                 درس ها
                             </div>
                             <div class="card-body" style="direction: rtl;">
-                                <form action="" method="POST">
-                                    <div class="input-group">
-                                        @if(isset($_GET['edit-lesson']) && !empty($_GET['edit-lesson']))
-                                            <input type="text" name="lesson_name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
+                                @if(isset($_GET['edit-lesson']) && !empty($_GET['edit-lesson']))
+                                    <form action="" method="POST">
+                                        <div class="input-group">
+                                            {{ csrf_field() }}
+                                            <input type="text" name="name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-warning" style="border-radius: 3px; color: white;"><i class="fas fa-edit"></i></button>
-                                        @else
-                                            <input type="text" name="lesson_name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
-                                            <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i></button>
-                                        @endif
-                                    </div><br>
+                                        </div>
+                                    </form>
+                                    @else
+                                        <form action="" method="POST">
+                                            {{ csrf_field() }}
+                                            <div class="input-group">
+                                                <input type="text" name="name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
+                                                <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i></button>
+                                            </div>
+                                        </form>
+                                    @endif
+                                    <br>
                                     <ul>
                                         @foreach($lessons as $lesson)
                                             <li>{{ $lesson->name }} | <a href="#" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>

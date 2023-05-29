@@ -35,4 +35,8 @@ Route::prefix('panel')->group(function() {
 
 Route::prefix('admins')->group(function() {
     Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
+
+    Route::post('/insert-lesson-room', 'AdminsDashboardController@insert_lesson_room')->name('insert.lesson.room');
+
+    Route::put('/update-lesson-room/{lesson_room}', 'AdminsDashboardController@update_lesson_room')->name('update.lesson.room');
 });
