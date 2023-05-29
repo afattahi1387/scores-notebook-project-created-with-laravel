@@ -11,3 +11,4 @@
 - [ ] change pages direction.
 - [ ] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons in admins dashboard.
+- [ ] Show validations in forms.
