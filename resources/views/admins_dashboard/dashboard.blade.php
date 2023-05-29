@@ -85,15 +85,16 @@
                             </div>
                             <div class="card-body" style="direction: rtl;">
                                 @if(isset($_GET['edit-lesson']) && !empty($_GET['edit-lesson']))
-                                    <form action="" method="POST">
+                                    <form action="{{ route('update.lesson', ['lesson' => $_GET['edit-lesson']]) }}" method="POST">
                                         <div class="input-group">
                                             {{ csrf_field() }}
-                                            <input type="text" name="name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
+                                            <input type="hidden" name="_method" value="put">
+                                            <input type="text" name="name" class="form-control" placeholder="نام درس" value="{{ $lesson_name }}" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-warning" style="border-radius: 3px; color: white;"><i class="fas fa-edit"></i></button>
                                         </div>
                                     </form>
                                     @else
-                                        <form action="" method="POST">
+                                        <form action="{{ route('insert.lesson') }}" method="POST">
                                             {{ csrf_field() }}
                                             <div class="input-group">
                                                 <input type="text" name="name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
@@ -104,7 +105,7 @@
                                     <br>
                                     <ul>
                                         @foreach($lessons as $lesson)
-                                            <li>{{ $lesson->name }} | <a href="#" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>
+                                            <li>{{ $lesson->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson={{ $lesson->id }}" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>
                                         @endforeach
                                     </ul>
                                 </form>
