@@ -71,7 +71,7 @@
                                 <br>
                                 <ul>
                                     @foreach($lesson_rooms as $lesson_room)
-                                        <li>{{ $lesson_room->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson-room={{ $lesson_room->id }}" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>
+                                        <li>{{ $lesson_room->name }} | <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}" class="text-primary">مشاهده لیست دانش آموزان</a> | <a href="{{ route('admins.dashboard') }}?edit-lesson-room={{ $lesson_room->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -105,7 +105,7 @@
                                     <br>
                                     <ul>
                                         @foreach($lessons as $lesson)
-                                            <li>{{ $lesson->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson={{ $lesson->id }}" class="text-warning" style="text-decoration: none;">ویرایش</a> | <span class="text-danger" style="text-decoration: none; cursor: pointer;">حذف</span></li>
+                                            <li>{{ $lesson->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson={{ $lesson->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
                                         @endforeach
                                     </ul>
                                 </form>

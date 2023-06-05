@@ -43,4 +43,6 @@ Route::prefix('admins')->group(function() {
     Route::post('/insert-lesson', 'AdminsDashboardController@insert_lesson')->name('insert.lesson');
 
     Route::put('/update-lesson/{lesson}', 'AdminsDashboardController@update_lesson')->name('update.lesson');
+
+    Route::get('/show-students-list/{lesson_room}', 'AdminsDashboardController@show_students_list')->name('show.students.list.for.admins');
 });
