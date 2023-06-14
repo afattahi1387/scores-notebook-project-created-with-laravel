@@ -13,3 +13,6 @@
 - [ ] create delete lesson rooms and lessons in admins dashboard.
 - [ ] Show validations in forms.
 - [ ] set .env file.
+- [ ] check user exists in insert and update teachers.
+- [ ] added flash messages to project.
+- [ ] after edit teacher.
