@@ -113,34 +113,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-list"></i>
-                        کلاس ها
-                    </div>
-                    <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                                <tr>
-                                    <th>ردیف</th>
-                                    <th>نام</th>
-                                    <th>عملیات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- @php $counter = 0; @endphp
-                                @foreach($lesson_rooms as $lesson_room)
-                                    <tr>
-                                        <td>@php echo ++$counter; @endphp</td>
-                                        <td>{{ $lesson_room['class_name'] }} - {{ $lesson_room['lesson_name'] }}</td>
-                                        <td>
-                                            <a href="{{ route('add.date', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-success">افزودن تاریخ</a>
-                                            <a href="{{ route('show.students.list', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-primary">مشاهده لیست دانش آموزان</a>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
-                            </tbody>
-                        </table>
+                <div class="row" style="direction: rtl;">
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-list"></i>
+                                دبیران
+                            </div>
+                            <div class="card-body" style="direction: rtl;">
+                                @if(isset($_GET['edit-teacher']) && !empty($_GET['edit-teacher']))
+                                    <form action="{{ route('update.teacher', ['teacher' => $_GET['edit-teacher']]) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="put">
+                                        <input type="text" name="name" class="form-control" placeholder="نام دبیر" value="{{ $teacher_row->name }}"><br>
+                                        <input type="text" name="username" placeholder="نام کاربری" class="form-control" value="{{ $teacher_row->username }}"><br>
+                                        <input type="password" name="new_password" placeholder="رمز عبور" class="form-control"><br>
+                                        <input type="hidden" name="password" value="{{ $teacher_row->password }}"> {{-- TODO: delete this line --}}
+                                        <button type="submit" class="btn btn-warning" style="border-radius: 3px; color: white;"><i class="fas fa-edit"></i> ویرایش دبیر</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('insert.teacher') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="text" name="name" class="form-control" placeholder="نام دبیر"><br>
+                                        <input type="text" name="username" placeholder="نام کاربری" class="form-control"><br>
+                                        <input type="password" name="password" placeholder="رمز عبور" class="form-control"><br>
+                                        <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i> افزودن دبیر</button>
+                                    </form>
+                                @endif
+                                <br>
+                                <ul>
+                                    @foreach($teachers as $teacher)
+                                        <li>{{ $teacher->name }} | {{-- <a href="#" class="text-primary">مشاهده لیست دانش آموزان</a> | --}}<a href="{{ route('admins.dashboard') }}?edit-teacher={{ $teacher->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
