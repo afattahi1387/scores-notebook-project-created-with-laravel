@@ -10,7 +10,7 @@
 - [ ] check fontawesome icons.
 - [ ] change pages direction.
 - [ ] change dashboards sidebar.
-- [ ] create delete lesson rooms and lessons in admins dashboard.
+- [ ] create delete lesson rooms and lessons and relation ships in admins dashboard.
 - [ ] Show validations in forms.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.

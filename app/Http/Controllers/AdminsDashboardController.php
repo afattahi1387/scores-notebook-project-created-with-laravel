@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Lesson;
 use App\LessonRoom;
-use Illuminate\Http\Request;
+use App\RelationShip;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AddTeacherRequest;
 use App\Http\Requests\EditTeacherRequest;
 use App\Http\Requests\AddAndEditNameRequest;
+use App\Http\Requests\AddRelationShipRequest;
 
 class AdminsDashboardController extends Controller
 {
@@ -92,7 +94,7 @@ class AdminsDashboardController extends Controller
             'password' => $password
         ]);
 
-        // TODO: added flash message
+        // TODO: add flash message
         return redirect()->route('admins.dashboard');
     }
 
@@ -104,7 +106,7 @@ class AdminsDashboardController extends Controller
         if($username != $teacher->username) {
             // TODO
         }
-        
+
         if(!empty($request->new_password)) {
             $new_password = bcrypt($request->new_password);
         } else {
@@ -117,11 +119,42 @@ class AdminsDashboardController extends Controller
             'password' => $new_password
         ]);
 
-        // TODO: added flash message
+        // TODO: add flash message
         return redirect()->route('admins.dashboard');
+    }
+
+    public function insert_relation_ship(AddRelationShipRequest $request, User $teacher) {
+        DB::insert('INSERT INTO relation_ships VALUES (NULL, ?, ?, ?, ?)', [$teacher->id, $request->lesson_room, 'App\LessonRoom', $request->lesson]);
+
+        // TODO: add flash message
+        return redirect()->route('show.teacher.classes', ['teacher' => $teacher->id]);
+    }
+
+    public function update_relation_ship(AddRelationShipRequest $request, RelationShip $relation_ship) {  // TODO: change request
+        $lesson_room = $request->lesson_room;
+        $lesson = $request->lesson;
+        $teacher_id = $relation_ship->user_id;
+
+        DB::update('UPDATE relation_ships SET userable_id = ?, lesson_id = ? WHERE id = ?', [$lesson_room, $lesson, $relation_ship->id]);
+
+        // TODO: add flash message
+        return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
     }
 
     public function show_students_list(LessonRoom $lesson_room) {
         return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners]);
+    }
+
+    public function show_teacher_classes(User $teacher) {
+        $classes = $teacher->lesson_rooms(false, true);
+        $lesson_rooms = LessonRoom::all();
+        $lessons = Lesson::all();
+
+        $relation_ship_information = isset($_GET['edit-relation-ship']) && !empty($_GET['edit-relation-ship']) ? RelationShip::find($_GET['edit-relation-ship']) : '';
+        if(!empty($relation_ship_information)) {
+            $relation_ship_information['lesson_room'] = LessonRoom::find($relation_ship_information->userable_id);
+            $relation_ship_information['lesson'] = $relation_ship_information->lesson;
+        }
+        return view('admins_dashboard.show_teacher_classes', ['teacher' => $teacher, 'classes' => $classes, 'lesson_rooms' => $lesson_rooms, 'lessons' => $lessons, 'relation_ship_information' => $relation_ship_information]);
     }
 }

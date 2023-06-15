@@ -143,7 +143,7 @@
                                 <br>
                                 <ul>
                                     @foreach($teachers as $teacher)
-                                        <li>{{ $teacher->name }} | {{-- <a href="#" class="text-primary">مشاهده لیست دانش آموزان</a> | --}}<a href="{{ route('admins.dashboard') }}?edit-teacher={{ $teacher->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
+                                        <li>{{ $teacher->name }} | <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}" class="text-primary">مشاهده لیست کلاس ها</a> | <a href="{{ route('admins.dashboard') }}?edit-teacher={{ $teacher->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
                                     @endforeach
                                 </ul>
                             </div>

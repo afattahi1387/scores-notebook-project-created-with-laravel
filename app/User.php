@@ -30,8 +30,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function lesson_rooms() {
-        $rows = RelationShip::where('userable_type', 'App\LessonRoom')->where('user_id', auth()->user()->id)->get();
+    public function lesson_rooms($get_user_authentication = true, $orderby_DESC = false) {
+        if($get_user_authentication) {
+            $user_id = auth()->user()->id;
+        } else {
+            $user_id = $this->id;
+        }
+        $rows = $orderby_DESC ? RelationShip::where('userable_type', 'App\LessonRoom')->where('user_id', $user_id)->orderBy('id', 'DESC')->get() : RelationShip::where('userable_type', 'App\LessonRoom')->where('user_id', $user_id)->get();
         $classes = array();
         foreach($rows as $row) {
             $array = $row;
@@ -39,7 +44,7 @@ class User extends Authenticatable
             $array['lesson_name'] = Lesson::where('id', $array['lesson_id'])->get()[0]['name'];
             $classes[] = $array;
         }
-        
+
         return $classes;
     }
 }
