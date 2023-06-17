@@ -92,7 +92,9 @@
                                         <td>{{ $learner->row }}</td>
                                         <td>{{ $learner->name }}</td>
                                         <td>
-                                            <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}?edit-learner={{ $learner->id }}" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></a>
+                                            @if(auth()->user()->type == 'admin')
+                                                <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}?edit-learner={{ $learner->id }}" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

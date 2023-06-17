@@ -16,6 +16,7 @@ class CreateRollCallsTable extends Migration
         Schema::create('roll_calls', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('date');
+            $table->string('term');
             $table->unsignedBigInteger('relation_ship_id');
             $table->foreign('relation_ship_id')->references('id')->on('relation_ships')->onDelete('cascade');
             $table->timestamps();

@@ -1,5 +1,5 @@
 - [ ] set redirect to dashboard page.
-- [ ] set add date validations.
+- [ ] set add date page validations.
 - [ ] check migrations.
 - [ ] change add PN in add date page.
 - [ ] find hash for register user.

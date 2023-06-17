@@ -34,6 +34,7 @@ class DashboardController extends Controller
         $day = $request->day_number < 10 ? '0' . $request->day_number : $request->day_number;
         $month = $request->month_number < 10 ? '0' . $request->month_number : $request->month_number;
         $year = $request->year_number < 10 ? '0' . $request->year_number : $request->year_number;
+        $term = $request->term;
         $lesson_room_learners = $lesson_room->learners;
         $roll_calls = array();
         $scores = array();
@@ -66,6 +67,7 @@ class DashboardController extends Controller
 
         $new_roll_call = RollCall::create([
             'date' => $year . '/' . $month . '/' . $day,
+            'term' => $term,
             'relation_ship_id' => $relation_ship->id
         ]);
 

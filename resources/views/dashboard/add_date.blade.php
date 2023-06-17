@@ -24,6 +24,12 @@
                             <b>/</b>
                             <input type="number" name="year_number" id="year_number" placeholder="سال">
                             <br><br>
+                            <select name="term" class="form-control">
+                                <option value="">ترم خود را وارد کنید</option>
+                                <option value="first">نوبت اول</option>
+                                <option value="second">نوبت دوم</option>
+                            </select>
+                            
                             @foreach ($lesson_room_learners as $learner)
                                 <hr>
                                 <div class="alert alert-primary" role="alert">
