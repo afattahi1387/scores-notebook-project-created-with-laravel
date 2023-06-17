@@ -144,7 +144,7 @@ class AdminsDashboardController extends Controller
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
     }
 
-    public function insert_learners_for_lesson_room(Request $requests, $lesson_room) {
+    public function insert_learners_for_lesson_room(Request $requests, $lesson_room) { // TODO: add request
         $keys = [];
         foreach($requests->all() as $key => $request) {
             if(substr($key, 0, 12) == 'learner_row_') {

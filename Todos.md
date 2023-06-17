@@ -10,9 +10,10 @@
 - [ ] check fontawesome icons.
 - [ ] change pages direction.
 - [ ] change dashboards sidebar.
-- [ ] create delete lesson rooms and lessons and relation ships in admins dashboard.
+- [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
 - [ ] Show validations in forms.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
 - [ ] added flash messages to project.
 - [ ] after edit teacher.
+- [ ] Add request to insert learner
