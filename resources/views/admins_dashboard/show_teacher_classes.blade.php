@@ -87,7 +87,7 @@
                                         <td>@php echo ++$counter; @endphp</td>
                                         <td>{{ $class['class_name'] }} - {{ $class['lesson_name'] }}</td>
                                         <td>
-                                            <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}?edit-relation-ship={{ $class->id }}" class="btn btn-warning" style="color: white;">ویرایش</a>
+                                            <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}?edit-relation-ship={{ $class->id }}" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></a>
                                             {{-- TODO: create delete button --}}
                                         </td>
                                     </tr>
