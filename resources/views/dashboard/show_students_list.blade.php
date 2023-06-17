@@ -12,12 +12,30 @@
                 @if(auth()->user()->type == 'admin')
                     <div class="card mb-4" style="direction: rtl;">
                         <div class="card-header">
-                            <i class="fas fa-list"></i>
-                            افزودن دانش آموز برای این کلاس
+                            @if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner']))
+                                <i class="fas fa-edit"></i>
+                                ویرایش دانش آموز: {{ $learner_for_edit->name }}
+                            @else
+                                <i class="fas fa-plus"></i>
+                                افزودن دانش آموز برای این کلاس
+                            @endif
                         </div>
                         <div class="card-body">
                             @if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner']))
-                                //
+                                <form action="{{ route('update.learner', ['learner' => $_GET['edit-learner']]) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="put">
+                                    <div class="form-floating">
+                                        <input type="number" name="learner_row" id="learner_row" placeholder="آمار دانش آموز" value="{{ $learner_for_edit->row }}" class="form-control" style="margin-left: 3px;">
+                                        <label for="learner_row">آمار دانش آموز</label>
+                                    </div><br>
+                                    <div class="form-floating">
+                                        <input type="text" name="learner_name" id="learner_name" placeholder="نام و نام خانوادگی دانش آموز" value="{{ $learner_for_edit->name }}" class="form-control">
+                                        <label for="learner_name">نام و نام خانوادگی دانش آموز</label>
+                                    </div><br>
+                                    <button type="submit" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i> ویرایش دانش آموز</button>
+                                    <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}" class="btn btn-danger"><i class="fas fa-times"></i> لغو</a>
+                                </form>
                             @else
                                 @if(isset($_GET['number-of-new-learners']) && !empty($_GET['number-of-new-learners']))
                                     <form action="{{ route('insert.learners.for.lesson.room', ['lesson_room' => $lesson_room->id]) }}" method="POST">
@@ -74,9 +92,7 @@
                                         <td>{{ $learner->row }}</td>
                                         <td>{{ $learner->name }}</td>
                                         <td>
-                                            {{-- <a href="{{ route('add.date', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-success">افزودن تاریخ</a>
-                                            <a href="{{ route('show.students.list', ['lesson_room' => $lesson_room['userable_id'], 'lesson' => $lesson_room['lesson_id']]) }}" class="btn btn-sm btn-primary">مشاهده لیست دانش آموزان</a> --}}
-                                            عملیات
+                                            <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}?edit-learner={{ $learner->id }}" class="btn btn-warning" style="color: white;">ویرایش</a>
                                         </td>
                                     </tr>
                                 @endforeach

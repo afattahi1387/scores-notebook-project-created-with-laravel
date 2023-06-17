@@ -10,6 +10,7 @@ use App\RelationShip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AddTeacherRequest;
+use App\Http\Requests\EditLearnerRequest;
 use App\Http\Requests\EditTeacherRequest;
 use App\Http\Requests\AddAndEditNameRequest;
 use App\Http\Requests\AddRelationShipRequest;
@@ -163,8 +164,23 @@ class AdminsDashboardController extends Controller
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room]);
     }
 
+    public function update_learner(EditLearnerRequest $request, Learner $learner) {
+        $learner->update([
+            'row' => $request->learner_row,
+            'name' => $request->learner_name
+        ]);
+
+        // TODO: add flash message
+        return redirect()->route('show.students.list.for.admins', ['lesson_room' => $learner->lesson_room_id]);
+    }
+
     public function show_students_list(LessonRoom $lesson_room) {
-        return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners]);
+        if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner'])) {
+            $learner_for_edit = Learner::find($_GET['edit-learner']);
+        } else {
+            $learner_for_edit = '';
+        }
+        return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'learner_for_edit' => $learner_for_edit]);
     }
 
     public function show_teacher_classes(User $teacher) {

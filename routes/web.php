@@ -54,6 +54,8 @@ Route::prefix('admins')->group(function() {
 
     Route::post('/insert-learners-for-lesson-room/{lesson_room}', 'AdminsDashboardController@insert_learners_for_lesson_room')->name('insert.learners.for.lesson.room');
 
+    Route::put('/update-learner/{learner}', 'AdminsDashboardController@update_learner')->name('update.learner');
+
     Route::get('/show-students-list/{lesson_room}', 'AdminsDashboardController@show_students_list')->name('show.students.list.for.admins');
 
     Route::get('/show-teacher-classes/{teacher}', 'AdminsDashboardController@show_teacher_classes')->name('show.teacher.classes');
