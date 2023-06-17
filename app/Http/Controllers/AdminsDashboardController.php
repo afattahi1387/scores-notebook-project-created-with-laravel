@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Lesson;
+use App\Learner;
 use App\LessonRoom;
 use App\RelationShip;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AddTeacherRequest;
 use App\Http\Requests\EditTeacherRequest;
@@ -139,6 +141,26 @@ class AdminsDashboardController extends Controller
 
         // TODO: add flash message
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
+    }
+
+    public function insert_learners_for_lesson_room(Request $requests, $lesson_room) {
+        $keys = [];
+        foreach($requests->all() as $key => $request) {
+            if(substr($key, 0, 12) == 'learner_row_') {
+                $keys[substr($key, 12)] = $requests['learner_row_' . substr($key, 12)];
+            }
+        }
+
+        foreach($keys as $k => $value) {
+            Learner::create([
+                'row' => $keys[$value],
+                'name' => $requests->all()['learner_name_' . $k],
+                'lesson_room_id' => $lesson_room
+            ]);
+        }
+
+        // TODO: add flash message
+        return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room]);
     }
 
     public function show_students_list(LessonRoom $lesson_room) {
