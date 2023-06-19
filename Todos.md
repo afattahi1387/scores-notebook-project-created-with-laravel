@@ -7,7 +7,7 @@
 - [ ] set redirect to dashboard.
 - [ ] delete work additions.
 - [ ] seperate admins dashboard html structure and teachers dashboard html structure.
-- [ ] check fontawesome icons.
+- [ ] check fontawesome icons and labels.
 - [ ] change pages direction.
 - [ ] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
@@ -18,3 +18,5 @@
 - [ ] after edit teacher.
 - [ ] Add request to insert learner
 - [ ] Add pages icons.
+- [ ] Change redirect to /home in login page if user is authenticated.
+- [ ] Set APP_DEBUG 'true' in .env file.
