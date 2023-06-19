@@ -11,7 +11,21 @@
                 <h2 class="mt-4">نمایش اطلاعات: {{ $learner->name }}</h2><br>
                 <div class="card mb-4">
                     @if(isset($_GET['edit-score']) && !empty($_GET['edit-score']))
-                        edit-score
+                        <div class="card-header">
+                            <i class="fas fa-edit"></i>
+                            ویرایش نمره گرفته شده در تاریخ: <b>{{ $score_for_edit->relavant_roll_call()->date }}</b>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('update.score', ['score' => $score_for_edit->id]) }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="put">
+                                <div class="input-group">
+                                    <input type="number" name="score" placeholder="نمره گرفته شده" value="{{ $score_for_edit->score }}" class="form-control" style="margin-left: 3px;">
+                                    <button type="submit" class="btn btn-warning" style="margin-left: 3px; color: white; border-radius: 3px;"><i class="fas fa-edit"></i></button>
+                                    <a href="{{ route('show.learner.information', ['learner' => $learner->id]) }}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                </div>
+                            </form>
+                        </div>
                     @elseif(isset($_GET['edit-term-final-score']) && !empty($_GET['edit-term-final-score']))
                         @if($_GET['edit-term-final-score'] == 'first')
                             @php $term = 'first'; @endphp
@@ -33,19 +47,12 @@
                                 <input type="hidden" name="term" value="{{ $term }}">
                                 <div class="input-group">
                                     <input type="number" name="term_final_score" placeholder="نمره پایانی" value="{{ $learner[$term . '_term_final_scores'] }}" max="20" min="0" class="form-control" style="margin-left: 3px;" required>
-                                    <button type="submit" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></button>
+                                    <button type="submit" class="btn btn-warning" style="margin-left: 3px; color: white; border-radius: 3px;"><i class="fas fa-edit"></i></button>
+                                    <a href="{{ route('show.learner.information', ['learner' => $learner->id]) }}" class="btn btn-danger"><i class="fas fa-times"></i></a>
                                 </div>
                             </form>
                         </div>
-                    @else
-                        run else
-                        {{--<div class="card-header">
-                            <i class="fas fa-graduation-cap"></i>
-                            //
-                        </div>
-                        <div class="card-body">
-                            //
-                        </div>--}}
+                    {{-- TODO: add else and add date for learner. --}}
                     @endif
                 </div>
                 <div class="card mb-4">
@@ -58,7 +65,7 @@
                             @if(!empty($attendance->score) && $attendance->relavant_roll_call()->term == 'first')
                                 <b>نمره تاریخ {{ $attendance->relavant_roll_call()->date }}:</b> <span class="text-primary">{{ $attendance->score }}</span>
                                 <span> | </span>
-                                <a href="#" class="text-warning">ویرایش</a><br><br>
+                                <a href="{{ route('show.learner.information', ['learner' => $learner->id]) }}?edit-score={{ $attendance->id }}" class="text-warning">ویرایش</a><br><br>
                             @endif
                         @endforeach
                         <h5>میانگین نمرات ترم اول: <span class="text-primary">{{ $learner->average_of_first_term_scores() }}</span></h5><br>
@@ -68,7 +75,7 @@
                             @if(!empty($attendance->score) && $attendance->relavant_roll_call()->term == 'second')
                                 <b>نمره تاریخ {{ $attendance->relavant_roll_call()->date }}:</b> <span class="text-primary">{{ $attendance->score }}</span>
                                 <span> | </span>
-                                <a href="#" class="text-warning">ویرایش</a><br><br>
+                                <a href="{{ route('show.learner.information', ['learner' => $learner->id]) }}?edit-score={{ $attendance->id }}" class="text-warning">ویرایش</a><br><br>
                             @endif
                         @endforeach
                         <h5>میانگین نمرات ترم دوم: <span class="text-primary">{{ $learner->average_of_second_term_scores() }}</span></h5><br>

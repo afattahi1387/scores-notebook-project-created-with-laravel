@@ -97,7 +97,8 @@ class DashboardController extends Controller
     }
 
     public function show_learner_information(Learner $learner) {
-        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $learner->attendances]);
+        $score_for_edit = isset($_GET['edit-score']) && !empty($_GET['edit-score']) ? StudentAttendance::find($_GET['edit-score']) : '';
+        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $learner->attendances, 'score_for_edit' => $score_for_edit]);
     }
 
     public function update_term_final_score(Request $request, Learner $learner, $term) {
@@ -107,5 +108,14 @@ class DashboardController extends Controller
 
         // TODO: add flash message
         return redirect()->route('show.learner.information', ['learner' => $learner->id]);
+    }
+
+    public function update_score(Request $request, StudentAttendance $score) { // TODO: add request
+        $score->update([
+            'score' => $request->score
+        ]);
+
+        // TODO: add flash message
+        return redirect()->route('show.learner.information', ['learner' => $score->learner->id]);
     }
 }

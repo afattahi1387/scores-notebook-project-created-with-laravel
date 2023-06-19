@@ -37,6 +37,8 @@ Route::get('/show-learner-information/{learner}', 'DashboardController@show_lear
 
 Route::put('/update-term-final-score/{learner}/{term}', 'DashboardController@update_term_final_score')->name('update.term.final.score');
 
+Route::put('/update-score/{score}', 'DashboardController@update_score')->name('update.score');
+
 Route::prefix('admins')->group(function() {
     Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
 

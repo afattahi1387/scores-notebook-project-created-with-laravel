@@ -13,4 +13,8 @@ class StudentAttendance extends Model
         $roll_call_id = $this->roll_call_id;
         return RollCall::where('id', $roll_call_id)->get()[0];
     }
+
+    public function learner() {
+        return $this->belongsTo(Learner::class);
+    }
 }
