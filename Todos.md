@@ -17,3 +17,4 @@
 - [ ] added flash messages to project.
 - [ ] after edit teacher.
 - [ ] Add request to insert learner
+- [ ] Add pages icons.
