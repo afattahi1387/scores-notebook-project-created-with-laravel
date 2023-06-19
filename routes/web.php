@@ -33,6 +33,8 @@ Route::prefix('panel')->group(function() {
     Route::get('/show-students-list/{lesson_room}/{lesson}', 'DashboardController@show_students_list')->name('show.students.list');
 });
 
+Route::get('/show-learner-information/{learner}', 'DashboardController@show_learner_information')->name('show.learner.information');
+
 Route::prefix('admins')->group(function() {
     Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
 

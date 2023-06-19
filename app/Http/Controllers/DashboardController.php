@@ -95,4 +95,8 @@ class DashboardController extends Controller
     public function show_students_list(LessonRoom $lesson_room, Lesson $lesson) {
         return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners]);
     }
+
+    public function show_learner_information(Learner $learner) {
+        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $learner->attendances]);
+    }
 }
