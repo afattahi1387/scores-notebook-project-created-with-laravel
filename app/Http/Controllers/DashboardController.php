@@ -99,4 +99,13 @@ class DashboardController extends Controller
     public function show_learner_information(Learner $learner) {
         return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $learner->attendances]);
     }
+
+    public function update_term_final_score(Request $request, Learner $learner, $term) {
+        $learner->update([
+            $term . '_term_final_scores' => $request->term_final_score
+        ]);
+
+        // TODO: add flash message
+        return redirect()->route('show.learner.information', ['learner' => $learner->id]);
+    }
 }

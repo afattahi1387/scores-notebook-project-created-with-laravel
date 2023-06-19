@@ -35,6 +35,8 @@ Route::prefix('panel')->group(function() {
 
 Route::get('/show-learner-information/{learner}', 'DashboardController@show_learner_information')->name('show.learner.information');
 
+Route::put('/update-term-final-score/{learner}/{term}', 'DashboardController@update_term_final_score')->name('update.term.final.score');
+
 Route::prefix('admins')->group(function() {
     Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
 
