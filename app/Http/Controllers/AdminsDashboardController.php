@@ -7,6 +7,7 @@ use App\Lesson;
 use App\Learner;
 use App\LessonRoom;
 use App\RelationShip;
+use App\TeacherSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AddTeacherRequest;
@@ -90,11 +91,15 @@ class AdminsDashboardController extends Controller
         $username = $request->username;
         $password = bcrypt($request->password);
 
-        User::create([
+        $new_user = User::create([
             'name' => $name,
             'type' => 'teacher',
             'username' => $username,
             'password' => $password
+        ]);
+
+        TeacherSetting::create([
+            'user_id' => $new_user->id
         ]);
 
         // TODO: add flash message
