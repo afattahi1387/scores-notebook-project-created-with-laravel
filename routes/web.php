@@ -31,6 +31,10 @@ Route::prefix('panel')->group(function() {
     Route::post('/insert-date/{lesson_room}/{lesson}', 'DashboardController@insert_date')->name('insert.date');
 
     Route::get('/show-students-list/{lesson_room}/{lesson}', 'DashboardController@show_students_list')->name('show.students.list');
+
+    Route::get('/settings', 'DashboardController@teachers_settings')->name('teachers.settings');
+
+    Route::post('/set-settings', 'DashboardController@set_settings')->name('set.settings');
 });
 
 Route::get('/show-learner-information/{learner}', 'DashboardController@show_learner_information')->name('show.learner.information');

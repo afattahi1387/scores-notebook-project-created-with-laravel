@@ -8,6 +8,7 @@ use App\Learner;
 use App\RollCall;
 use App\LessonRoom;
 use App\RelationShip;
+use App\TeacherSetting;
 use App\StudentAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,35 @@ class DashboardController extends Controller
         $user = User::find(auth()->user()->id);
         $lesson_rooms = $user->lesson_rooms();
         return view('dashboard.dashboard', ['lesson_rooms' => $lesson_rooms]);
+    }
+
+    public function teachers_settings() {
+        // if(auth()->user()->type != 'teacher') {
+        //     TODO: set it
+        //     TODO: add flash message
+        // }
+
+        return view('dashboard.teacher_settings');
+    }
+
+    public function set_settings(Request $request) {
+        // if(auth()->user()->type != 'teacher') {
+        //     TODO: set it
+        //     TODO: add flash message
+        // }
+
+        $LOCP = empty($request->no_LOCP) ? $request->LOCP : null;
+        $LOCN = empty($request->no_LOCN) ? $request->LOCN : null;
+        $LOCA = empty($request->no_LOCA) ? $request->LOCA : null;
+
+        TeacherSetting::find(auth()->user()->id)->update([
+            'level_of_calculate_positive' => $LOCP,
+            'level_of_calculate_negative' => $LOCN,
+            'level_of_calculate_absences' => $LOCA
+        ]);
+
+        // TODO: add flash message
+        return redirect()->route('teachers.settings');
     }
 
     public function add_date(LessonRoom $lesson_room, Lesson $lesson) {

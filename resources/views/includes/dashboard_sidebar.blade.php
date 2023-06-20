@@ -7,6 +7,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
+                <a class="nav-link" href="{{ route('teachers.settings') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                    تنظیمات
+                </a>
                 <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout_form').submit();" href="{{ route('logout') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-sign-out"></i></div>
                     خروج
