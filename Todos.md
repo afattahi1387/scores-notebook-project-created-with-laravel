@@ -22,3 +22,5 @@
 - [ ] Set APP_DEBUG 'true' in .env file.
 - [ ] Add request for edit final scores and edit scores.
 - [ ] Set edit PN number show learner information page.
+- [ ] Set "Request" for set settings function.
+- [ ] Show values in teacher_settings table in teacher_settings.blade.php file.
