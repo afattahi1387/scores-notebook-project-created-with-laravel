@@ -118,4 +118,14 @@ class DashboardController extends Controller
         // TODO: add flash message
         return redirect()->route('show.learner.information', ['learner' => $score->learner->id]);
     }
+
+    public function change_pn_number(Request $request, Learner $learner) {
+        $learner->update([
+            'first_term_PN_number' => $request->first_term_PN_number,
+            'second_term_PN_number' => $request->second_term_PN_number
+        ]);
+
+        // TODO: add flash message
+        return redirect()->route('show.learner.information', ['learner' => $learner->id]);
+    }
 }
