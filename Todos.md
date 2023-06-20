@@ -21,3 +21,4 @@
 - [ ] Change redirect to /home in login page if user is authenticated.
 - [ ] Set APP_DEBUG 'true' in .env file.
 - [ ] Add request for edit final scores and edit scores.
+- [ ] Set edit PN number show learner information page.
