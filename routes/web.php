@@ -39,7 +39,7 @@ Route::prefix('panel')->group(function() {
 
 Route::get('/show-learner-information/{learner}/{relation_ship}', 'DashboardController@show_learner_information')->name('show.learner.information');
 
-Route::put('/update-term-final-score/{learner}/{term}', 'DashboardController@update_term_final_score')->name('update.term.final.score');
+Route::put('/update-term-final-score/{learner}/{relation_ship}/{term}', 'DashboardController@update_term_final_score')->name('update.term.final.score');
 
 Route::put('/update-score/{score}', 'DashboardController@update_score')->name('update.score');
 

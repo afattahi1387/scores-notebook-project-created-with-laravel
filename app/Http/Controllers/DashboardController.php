@@ -9,6 +9,7 @@ use App\RollCall;
 use App\LessonRoom;
 use App\RelationShip;
 use App\TeacherSetting;
+use App\PNAndFinalScore;
 use App\StudentAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -137,13 +138,14 @@ class DashboardController extends Controller
         return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $attendances, 'score_for_edit' => $score_for_edit, 'relation_ship' => $relation_ship]);
     }
 
-    public function update_term_final_score(Request $request, Learner $learner, $term) {
-        $learner->update([
-            $term . '_term_final_scores' => $request->term_final_score
+    public function update_term_final_score(Request $request, Learner $learner, RelationShip $relation_ship, $term) {
+        $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship->id)->where('learner_id', $learner->id)->get()[0];
+        $p_n_and_final_score->update([
+            $term . '_term_final_score' => $request->term_final_score
         ]);
 
         // TODO: add flash message
-        return redirect()->route('show.learner.information', ['learner' => $learner->id]);
+        return redirect()->route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]);
     }
 
     public function update_score(Request $request, StudentAttendance $score) { // TODO: add request

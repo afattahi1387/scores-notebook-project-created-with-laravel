@@ -42,12 +42,12 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('update.term.final.score', ['learner' => $learner->id, 'term' => $term]) }}" method="POST">
+                                <form action="{{ route('update.term.final.score', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id, 'term' => $term]) }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="put">
                                     <input type="hidden" name="term" value="{{ $term }}">
                                     <div class="input-group">
-                                        <input type="number" name="term_final_score" placeholder="نمره پایانی" value="{{ $learner[$term . '_term_final_scores'] }}" max="20" min="0" class="form-control" style="margin-left: 3px;" required>
+                                        <input type="number" name="term_final_score" placeholder="نمره پایانی" value="{{ $learner->get_p_n_and_final_score()[$term . '_term_final_score'] }}" max="20" min="0" class="form-control" style="margin-left: 3px;" required>
                                         <button type="submit" class="btn btn-warning" style="margin-left: 3px; color: white; border-radius: 3px;"><i class="fas fa-edit"></i></button>
                                         <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}" class="btn btn-danger"><i class="fas fa-times"></i></a>
                                     </div>
