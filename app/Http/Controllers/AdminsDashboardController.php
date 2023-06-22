@@ -8,6 +8,7 @@ use App\Learner;
 use App\LessonRoom;
 use App\RelationShip;
 use App\TeacherSetting;
+use App\PNAndFinalScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\AddTeacherRequest;
@@ -163,6 +164,8 @@ class AdminsDashboardController extends Controller
                 'name' => $requests->all()['learner_name_' . $k],
                 'lesson_room_id' => $lesson_room
             ]);
+
+            // PNAndFinalScore::create([]); TODO: create records in p_n_and_final_scores table for new learner
         }
 
         // TODO: add flash message

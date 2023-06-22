@@ -123,12 +123,18 @@ class DashboardController extends Controller
     }
 
     public function show_students_list(LessonRoom $lesson_room, Lesson $lesson) {
-        return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners]);
+        $relation_ship_id = RelationShip::where('user_id', auth()->user()->id)->where('userable_id', $lesson_room->id)->where('userable_type', 'App\LessonRoom')->where('lesson_id', $lesson->id)->get()[0]['id'];
+        return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'relation_ship_id' => $relation_ship_id]);
     }
 
-    public function show_learner_information(Learner $learner) {
+    public function show_learner_information(Learner $learner, RelationShip $relation_ship) {
+        $roll_calls = RollCall::where('relation_ship_id', $relation_ship->id)->get();
+        $attendances = array();
+        foreach($roll_calls as $roll_call) {
+            $attendances[] = StudentAttendance::where('roll_call_id', $roll_call->id)->where('learner_id', $learner->id)->get()[0];
+        }
         $score_for_edit = isset($_GET['edit-score']) && !empty($_GET['edit-score']) ? StudentAttendance::find($_GET['edit-score']) : '';
-        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $learner->attendances, 'score_for_edit' => $score_for_edit]);
+        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $attendances, 'score_for_edit' => $score_for_edit, 'relation_ship' => $relation_ship]);
     }
 
     public function update_term_final_score(Request $request, Learner $learner, $term) {

@@ -19,10 +19,6 @@ class CreateLearnersTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('lesson_room_id');
             $table->foreign('lesson_room_id')->references('id')->on('lesson_rooms')->onDelete('cascade');
-            $table->integer('first_term_PN_number')->default(0);
-            $table->integer('second_term_PN_number')->default(0);
-            $table->integer('first_term_final_scores')->nullable();
-            $table->integer('second_term_final_scores')->nullable();
             $table->timestamps();
         });
     }

@@ -24,3 +24,6 @@
 - [ ] Set edit PN number show learner information page.
 - [ ] Set "Request" for set settings function.
 - [ ] Show values in teacher_settings table in teacher_settings.blade.php file.
+- [ ] مشاهده اطلاعات دانش آموز باید برای ادمین محدود باشد.
+- [ ] Add charts.
+- [ ] change p_n_...... table name.
