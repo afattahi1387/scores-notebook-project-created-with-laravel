@@ -113,12 +113,14 @@ class DashboardController extends Controller
             ]);
 
             if(!empty($PNs[$learner->id])) {
-                $old_PN = $learner->PN_number;
-                $learner->update([
-                    'PN_number' => $old_PN + $PNs[$learner->id]
+                $p_n_and_final_score = $learner->get_p_n_and_final_score();
+                $old_PN = $p_n_and_final_score[$request->term . '_term_PN_number'];
+                $p_n_and_final_score->update([
+                    $request->term . '_term_PN_number' => $old_PN + $PNs[$learner->id]
                 ]);
             }
 
+            // TODO: add flash message
             return redirect()->route('dashboard');
         }
     }
