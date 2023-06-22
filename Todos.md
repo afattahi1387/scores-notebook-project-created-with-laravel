@@ -27,3 +27,4 @@
 - [ ] مشاهده اطلاعات دانش آموز باید برای ادمین محدود باشد.
 - [ ] Add charts.
 - [ ] change p_n_...... table name.
+- [ ] Added change absents for learner in show learner information page for teachers.

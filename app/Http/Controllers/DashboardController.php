@@ -154,16 +154,17 @@ class DashboardController extends Controller
         ]);
 
         // TODO: add flash message
-        return redirect()->route('show.learner.information', ['learner' => $score->learner->id]);
+        return redirect()->route('show.learner.information', ['learner' => $score->learner->id, 'relation_ship' => $score->relavant_roll_call()->relation_ship]);
     }
 
-    public function change_pn_number(Request $request, Learner $learner) {
-        $learner->update([
+    public function change_pn_number(Request $request, Learner $learner, $relation_ship_id) {
+        $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship_id)->where('learner_id', $learner->id)->get()[0];
+        $p_n_and_final_score->update([
             'first_term_PN_number' => $request->first_term_PN_number,
             'second_term_PN_number' => $request->second_term_PN_number
         ]);
 
         // TODO: add flash message
-        return redirect()->route('show.learner.information', ['learner' => $learner->id]);
+        return redirect()->route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship_id]);
     }
 }

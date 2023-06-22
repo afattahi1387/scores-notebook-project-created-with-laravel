@@ -65,6 +65,10 @@ class Learner extends Model
             
             $score -= ($number_of_absences * $teacher_settings['level_of_calculate_absences']);
         }
+
+        if(is_float($score)) { // TODO: correct it
+            $score = round($score);
+        }
         
         if($score >= 20) {
             $score = 20;

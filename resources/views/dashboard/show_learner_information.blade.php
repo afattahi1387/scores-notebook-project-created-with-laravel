@@ -63,19 +63,19 @@
                         نمایش اطلاعات: {{ $learner->name }}
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('change.pn.number', ['learner' => $learner->id]) }}" method="POST">
+                        <form action="{{ route('change.pn.number', ['learner' => $learner->id, 'relation_ship_id' => $relation_ship->id]) }}" method="POST">
                             {{ csrf_field() }}
                             <div class="input-group">
                                 <div class="form-floating">
-                                    <input type="number" name="first_term_PN_number" id="first_term_PN_number" placeholder="نمره مثبت یا منفی ترم اول" value="{{ $learner->first_term_PN_number }}" class="form-control" required>
+                                    <input type="number" name="first_term_PN_number" id="first_term_PN_number" placeholder="نمره مثبت یا منفی ترم اول" value="{{ $learner->get_p_n_and_final_score()->first_term_PN_number }}" class="form-control" required>
                                     <label for="first_term_PN_number">نمره مثبت یا منفی ترم اول</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="number" name="second_term_PN_number" id="second_term_PN_number" placeholder="نمره مثبت یا منفی ترم دوم" value="{{ $learner->second_term_PN_number }}" class="form-control" required>
+                                    <input type="number" name="second_term_PN_number" id="second_term_PN_number" placeholder="نمره مثبت یا منفی ترم دوم" value="{{ $learner->get_p_n_and_final_score()->second_term_PN_number }}" class="form-control" required>
                                     <label for="second_term_PN_number">نمره مثبت یا منفی ترم دوم</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i></button>
+                            <button type="submit" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></button>
                         </form>
                         <hr>
                         @foreach($attendances as $attendance)

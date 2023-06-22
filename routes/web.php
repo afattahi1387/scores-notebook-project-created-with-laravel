@@ -43,7 +43,7 @@ Route::put('/update-term-final-score/{learner}/{relation_ship}/{term}', 'Dashboa
 
 Route::put('/update-score/{score}', 'DashboardController@update_score')->name('update.score');
 
-Route::post('/change-pn-number/{learner}', 'DashboardController@change_pn_number')->name('change.pn.number');
+Route::post('/change-pn-number/{learner}/{relation_ship_id}', 'DashboardController@change_pn_number')->name('change.pn.number');
 
 Route::prefix('admins')->group(function() {
     Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
