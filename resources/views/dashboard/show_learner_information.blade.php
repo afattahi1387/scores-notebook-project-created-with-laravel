@@ -27,6 +27,30 @@
                                     </div>
                                 </form>
                             </div>
+                        @elseif(isset($_GET['edit-term-development-score']) && !empty($_GET['edit-term-development-score']))
+                            @if($_GET['edit-term-development-score'] == 'first')
+                                @php $term = 'first'; @endphp
+                            @elseif($_GET['edit-term-development-score'] == 'second')
+                                @php $term = 'second'; @endphp
+                            @endif
+                            <div class="card-header">
+                                <i class="fas fa-edit"></i>
+                                @if($term == 'first')
+                                    ویرایش نمره تکوینی داده شده برای ترم اول
+                                @elseif($term == 'second')
+                                    ویرایش نمره تکوینی داده شده برای ترم دوم
+                                @endif
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('update.term.development.score', ['learner_id' => $learner->id, 'relation_ship_id' => $relation_ship->id, 'term' => $term]) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="put">
+                                    <div class="input-group">
+                                        <input type="number" name="edit_term_development_score" placeholder="نمره تکوینی" value="{{ $TDS_for_edit[$term . '_term_development_score'] }}" class="form-control" style="margin-left: 3px;" required>
+                                        <button type="submit" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></button>
+                                    </div>
+                                </form>
+                            </div>
                         @elseif(isset($_GET['edit-term-final-score']) && !empty($_GET['edit-term-final-score']))
                             @if($_GET['edit-term-final-score'] == 'first')
                                 @php $term = 'first'; @endphp
@@ -89,7 +113,8 @@
                                 <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}?edit-score={{ $attendance->id }}" class="text-warning">ویرایش</a><br><br>
                             @endif
                         @endforeach
-                        <h5>میانگین نمرات ترم اول: <span class="text-primary">{{ $learner->calculate_term_development_score($relation_ship->id, 'first') }}</span></h5><br>
+                        <h5>نمره تکوینی محاسبه شده برای ترم اول: <span class="text-primary">{{ $learner->calculate_term_development_score($relation_ship->id, 'first') }}</span></h5><br>
+                        <h5>نمره تکوینی داده شده توسط دبیر برای ترم اول: <span class="text-primary">{{ $learner->get_p_n_and_final_score()->first_term_development_score == null ? 'نامشخص' : $learner->get_p_n_and_final_score()->first_term_development_score }}</span> | <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}?edit-term-development-score=first" class="text-warning">ویرایش</a></h5><br>
                         <h5>نمره پایانی ترم اول: <span class="text-primary">{{ $learner->get_p_n_and_final_score()->first_term_final_score == null ? 'نامشخص' : $learner->get_p_n_and_final_score()->first_term_final_score }}</span> | <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}?edit-term-final-score=first" class="text-warning">ویرایش</a></h5>
                         <hr>
                         @foreach($attendances as $attendance)
@@ -103,7 +128,8 @@
                                 <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}?edit-score={{ $attendance->id }}" class="text-warning">ویرایش</a><br><br>
                             @endif
                         @endforeach
-                        <h5>میانگین نمرات ترم دوم: <span class="text-primary">{{ $learner->calculate_term_development_score($relation_ship->id, 'second') }}</span></h5><br>
+                        <h5>نمره تکوینی محاسبه شده برای ترم دوم: <span class="text-primary">{{ $learner->calculate_term_development_score($relation_ship->id, 'second') }}</span></h5><br>
+                        <h5>نمره تکوینی داده شده توسط دبیر برای ترم دوم: <span class="text-primary">{{ $learner->get_p_n_and_final_score()->second_term_development_score == null ? 'نامشخص' : $learner->get_p_n_and_final_score()->second_term_development_score }}</span> | <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}?edit-term-development-score=second" class="text-warning">ویرایش</a></h5><br>
                         <h5>نمره پایانی ترم دوم: <span class="text-primary">{{ $learner->get_p_n_and_final_score()->second_term_final_score == null ? 'نامشخص' : $learner->get_p_n_and_final_score()->second_term_final_score }}</span> | <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}?edit-term-final-score=second" class="text-warning">ویرایش</a></h5>
                     </div>
                 </div>

@@ -137,7 +137,18 @@ class DashboardController extends Controller
             $attendances[] = StudentAttendance::where('roll_call_id', $roll_call->id)->where('learner_id', $learner->id)->get()[0];
         }
         $score_for_edit = isset($_GET['edit-score']) && !empty($_GET['edit-score']) ? StudentAttendance::find($_GET['edit-score']) : '';
-        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $attendances, 'score_for_edit' => $score_for_edit, 'relation_ship' => $relation_ship]);
+        $TDS_for_edit = isset($_GET['edit-term-development-score']) && !empty($_GET['edit-term-development-score']) ? PNAndFinalScore::where('relation_ship_id', $relation_ship->id)->where('learner_id', $learner->id)->get()[0] : '';
+        return view('dashboard.show_learner_information', ['learner' => $learner, 'attendances' => $attendances, 'score_for_edit' => $score_for_edit, 'relation_ship' => $relation_ship, 'TDS_for_edit' => $TDS_for_edit]);
+    }
+
+    public function update_term_development_score(Request $request, $learner_id, $relation_ship_id, $term) {
+        $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship_id)->where('learner_id', $learner_id)->get()[0];
+        $p_n_and_final_score->update([
+            $term . '_term_development_score' => $request['edit_term_development_score']
+        ]);
+
+        // TODO: add flash message
+        return redirect()->route('show.learner.information', ['learner' => $learner_id, 'relation_ship' => $relation_ship_id]);
     }
 
     public function update_term_final_score(Request $request, Learner $learner, RelationShip $relation_ship, $term) {
