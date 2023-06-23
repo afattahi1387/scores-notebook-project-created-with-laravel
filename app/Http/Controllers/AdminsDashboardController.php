@@ -183,12 +183,14 @@ class AdminsDashboardController extends Controller
     }
 
     public function show_students_list(LessonRoom $lesson_room) {
-        if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner'])) {
-            $learner_for_edit = Learner::find($_GET['edit-learner']);
-        } else {
-            $learner_for_edit = '';
-        }
-        return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'learner_for_edit' => $learner_for_edit]);
+        dd('salam');
+        // TODO: set it
+        // if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner'])) {
+        //     $learner_for_edit = Learner::find($_GET['edit-learner']);
+        // } else {
+        //     $learner_for_edit = '';
+        // }
+        // return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'learner_for_edit' => $learner_for_edit]);
     }
 
     public function show_teacher_classes(User $teacher) {
