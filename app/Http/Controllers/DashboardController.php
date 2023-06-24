@@ -29,19 +29,17 @@ class DashboardController extends Controller
     }
 
     public function teachers_settings() {
-        // if(auth()->user()->type != 'teacher') {
-        //     TODO: set it
-        //     TODO: add flash message
-        // }
+        if(auth()->user()->type != 'teacher') {
+            return redirect()->route('admins.dashboard');
+        }
 
         return view('dashboard.teacher_settings');
     }
 
     public function set_settings(Request $request) {
-        // if(auth()->user()->type != 'teacher') {
-        //     TODO: set it
-        //     TODO: add flash message
-        // }
+        if(auth()->user()->type != 'teacher') {
+            return redirect()->route('admins.dashboard');
+        }
 
         $LOCP = empty($request->no_LOCP) ? $request->LOCP : null;
         $LOCN = empty($request->no_LOCN) ? $request->LOCN : null;

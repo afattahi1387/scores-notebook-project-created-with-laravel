@@ -143,7 +143,7 @@ class AdminsDashboardController extends Controller
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher->id]);
     }
 
-    public function update_relation_ship(AddRelationShipRequest $request, RelationShip $relation_ship) {  // TODO: change request
+    public function update_relation_ship(AddRelationShipRequest $request, RelationShip $relation_ship) {
         $lesson_room = $request->lesson_room;
         $lesson = $request->lesson;
         $teacher_id = $relation_ship->user_id;
@@ -164,15 +164,21 @@ class AdminsDashboardController extends Controller
         }
 
         foreach($keys as $k => $value) {
-            Learner::create([
+            $new_learner = Learner::create([
                 'row' => $keys[$value],
                 'name' => $requests->all()['learner_name_' . $k],
                 'lesson_room_id' => $lesson_room
             ]);
 
-            // PNAndFinalScore::create([]); TODO: create records in p_n_and_final_scores table for new learner
-
+            $relation_ships = RelationShip::where('userable_id', $lesson_room)->where('userable_type', 'App\LessonRoom')->get();
+            foreach($relation_ships as $relation_ship) {
+                PNAndFinalScore::create([
+                    'relation_ship_id' => $relation_ship->id,
+                    'learner_id' => $new_learner->id
+                ]);
+            }
         }
+
         $show_flash_message = new ShowFlashMessageController();
         $show_flash_message->add_flash_message('success', 'دانش آموز شما برای این کلاس با موفقیت اضافه شد.');
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room]);

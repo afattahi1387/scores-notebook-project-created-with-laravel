@@ -59,7 +59,13 @@
                                             <input type="text" name="learner_name_{{ $learner_row }}" placeholder="نام و نام خانوادگی" class="form-control">
                                         </div><br>
                                     @endfor
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> افزودن دانش آموزان</button>
+
+                                    @if($_GET['number-of-new-learners'] == 1)
+                                        @php $ok_label = 'افزودن دانش آموز'; @endphp
+                                    @elseif($_GET['number-of-new-learners'] > 1)
+                                        @php $ok_label = 'افزودن دانش آموزان'; @endphp
+                                    @endif
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> {{ $ok_label }}</button>
                                 </form>
                             @else
                                 <form action="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}" method="GET">

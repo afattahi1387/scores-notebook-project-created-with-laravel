@@ -47,7 +47,7 @@ class Learner extends Model
         $score = self::average_of_term_scores($relation_ship_id, $term);
         $teacher_settings = TeacherSetting::where('user_id', RelationShip::find($relation_ship_id)->user_id)->get()[0];
         $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship_id)->where('learner_id', $this->id)->get()[0];
-        if(!empty($teacher_settings['level_of_calculate_positive']) && !empty($teacher_settings['level_of_calculate_negative'])) { // TODO: convert && to ||
+        if(!empty($teacher_settings['level_of_calculate_positive']) && !empty($teacher_settings['level_of_calculate_negative'])) {
             if(!empty($p_n_and_final_score[$term . '_term_PN_number'])) {
                 $score += $p_n_and_final_score[$term . '_term_PN_number'] > 0 ? $p_n_and_final_score[$term . '_term_PN_number'] * $teacher_settings['level_of_calculate_positive'] : $p_n_and_final_score[$term . '_term_PN_number'] * $teacher_settings['level_of_calculate_negative'];;
             }

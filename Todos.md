@@ -1,35 +1,29 @@
-- [ ] set redirect to dashboard page.
-- [ ] set add date page validations.
 - [ ] check migrations.
 - [x] change add PN in add date page.
 - [ ] find hash for register user.
 - [ ] no access to dashboards.
 - [ ] set redirect to dashboard.
 - [ ] delete work additions.
-- [ ] seperate admins dashboard html structure and teachers dashboard html structure.
-- [ ] check fontawesome icons and labels.
+- [x] seperate admins dashboard html structure and teachers dashboard html structure.
+- [x] check fontawesome icons and labels.
 - [ ] change pages direction.
 - [x] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
-- [ ] Set requests and Show validations for add date, add teacher, edit learner and edit teacher.
+- [ ] Set requests and Show validations for add date, add teacher, edit learner and edit teacher and all requests.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
 - [ ] added flash messages to project.
 - [ ] after edit teacher.
-- [ ] Add request to insert learner
 - [x] Add pages icons.
 - [ ] Change redirect to /home in login page if user is authenticated.
 - [ ] Set APP_DEBUG 'true' in .env file.
-- [ ] Add request for edit final scores and edit scores.
-- [ ] Set edit PN number show learner information page.
-- [ ] Set "Request" for set settings function.
 - [ ] Show values in teacher_settings table in teacher_settings.blade.php file.
 - [ ] مشاهده اطلاعات دانش آموز باید برای ادمین محدود باشد.
 - [ ] Add charts.
 - [x] change p_n_...... table name.
 - [ ] Added change absents for learner in show learner information page for teachers.
-- [ ] Add request for forms.
 - [ ] Set insert records to p_n_and_final_scores table.
 - [ ] Set recovery project database.
 - [ ] Set flashed messages.
 - [x] Add HTTP errors.
+- [ ] Check all 'TODO:'
