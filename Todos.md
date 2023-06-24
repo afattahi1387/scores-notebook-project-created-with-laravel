@@ -32,4 +32,4 @@
 - [ ] Set insert records to p_n_and_final_scores table.
 - [ ] Set recovery project database.
 - [ ] Set flashed messages.
-- [ ] Add HTTP errors.
+- [x] Add HTTP errors.
