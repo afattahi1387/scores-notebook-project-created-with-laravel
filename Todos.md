@@ -1,7 +1,7 @@
 - [ ] set redirect to dashboard page.
 - [ ] set add date page validations.
 - [ ] check migrations.
-- [ ] change add PN in add date page.
+- [x] change add PN in add date page.
 - [ ] find hash for register user.
 - [ ] no access to dashboards.
 - [ ] set redirect to dashboard.
@@ -26,8 +26,10 @@
 - [ ] Show values in teacher_settings table in teacher_settings.blade.php file.
 - [ ] مشاهده اطلاعات دانش آموز باید برای ادمین محدود باشد.
 - [ ] Add charts.
-- [ ] change p_n_...... table name.
+- [x] change p_n_...... table name.
 - [ ] Added change absents for learner in show learner information page for teachers.
 - [ ] Add request for forms.
 - [ ] Set insert records to p_n_and_final_scores table.
 - [ ] Set recovery project database.
+- [ ] Set flashed messages.
+- [ ] Add HTTP errors.
