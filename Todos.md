@@ -9,7 +9,7 @@
 - [ ] seperate admins dashboard html structure and teachers dashboard html structure.
 - [ ] check fontawesome icons and labels.
 - [ ] change pages direction.
-- [ ] change dashboards sidebar.
+- [x] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
 - [ ] Show validations in forms.
 - [ ] set .env file.
