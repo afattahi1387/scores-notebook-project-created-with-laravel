@@ -14,6 +14,7 @@ use App\StudentAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AddDateRequest;
+use App\Http\Controllers\ShowFlashMessageController;
 
 class DashboardController extends Controller
 {
@@ -52,7 +53,7 @@ class DashboardController extends Controller
             'level_of_calculate_absences' => $LOCA
         ]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'تنظیمات شما با موفقیت ویرایش شد.');
         return redirect()->route('teachers.settings');
     }
 
@@ -120,7 +121,7 @@ class DashboardController extends Controller
                 ]);
             }
 
-            // TODO: add flash message
+            ShowFlashMessageController::add_flash_message('success', 'تاریخ و حضور و غیاب مربوط به آن با موفقیت اضافه شد.');
             return redirect()->route('dashboard');
         }
     }
@@ -147,7 +148,12 @@ class DashboardController extends Controller
             $term . '_term_development_score' => $request['edit_term_development_score']
         ]);
 
-        // TODO: add flash message
+        if($term == 'first') {
+            $term_for_flash = 'اول';
+        } elseif($term == 'second') {
+            $term_for_flash = 'دوم';
+        }
+        ShowFlashMessageController::add_flash_message('success', sprintf('نمره مستمر داده شده در ترم %s با موفقیت ثبت شد.', $term_for_flash));
         return redirect()->route('show.learner.information', ['learner' => $learner_id, 'relation_ship' => $relation_ship_id]);
     }
 
@@ -157,7 +163,13 @@ class DashboardController extends Controller
             $term . '_term_final_score' => $request->term_final_score
         ]);
 
-        // TODO: add flash message
+        if($term == 'first') {
+            $term_for_flash = 'اول';
+        } elseif($term == 'second') {
+            $term_for_flash = 'دوم';
+        }
+
+        ShowFlashMessageController::add_flash_message('success', sprintf('نمره پایانی ترم %s با موفقیت ثبت شد.', $term_for_flash));
         return redirect()->route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]);
     }
 
@@ -166,7 +178,7 @@ class DashboardController extends Controller
             'score' => $request->score
         ]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'نمره شما با موفقیت ویرایش شد.');
         return redirect()->route('show.learner.information', ['learner' => $score->learner->id, 'relation_ship' => $score->relavant_roll_call()->relation_ship]);
     }
 
@@ -177,7 +189,7 @@ class DashboardController extends Controller
             'second_term_PN_number' => $request->second_term_PN_number
         ]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'مثبت و منفی ترم اول و دوم برای این دانش آموز با موفقیت ثبت شد.');
         return redirect()->route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship_id]);
     }
 }

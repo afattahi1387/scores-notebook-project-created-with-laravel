@@ -15,6 +15,10 @@ Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
 Route::get('/login', 'MainController@login')->name('login');
 
+Route::get('/flashed', 'ShowFlashMessageController@get_flashed_messages');
+
+Route::get('/add-flash/{message_type}/{message_text}', 'ShowFlashMessageController@add_flash_message');
+
 Route::get('/redirect-to-dashboard', function() {
     if(auth()->user()->type == 'teacher') {
         return redirect()->route('dashboard');

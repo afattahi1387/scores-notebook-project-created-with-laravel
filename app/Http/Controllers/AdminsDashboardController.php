@@ -16,6 +16,7 @@ use App\Http\Requests\EditLearnerRequest;
 use App\Http\Requests\EditTeacherRequest;
 use App\Http\Requests\AddAndEditNameRequest;
 use App\Http\Requests\AddRelationShipRequest;
+use App\Http\Controllers\ShowFlashMessageController;
 
 class AdminsDashboardController extends Controller
 {
@@ -103,7 +104,7 @@ class AdminsDashboardController extends Controller
             'user_id' => $new_user->id
         ]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'دبیر جدید با موفقیت اضافه شد.');
         return redirect()->route('admins.dashboard');
     }
 
@@ -128,14 +129,14 @@ class AdminsDashboardController extends Controller
             'password' => $new_password
         ]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'دبیر مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('admins.dashboard');
     }
 
     public function insert_relation_ship(AddRelationShipRequest $request, User $teacher) {
         DB::insert('INSERT INTO relation_ships VALUES (NULL, ?, ?, ?, ?)', [$teacher->id, $request->lesson_room, 'App\LessonRoom', $request->lesson]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'کلاس مورد نظر شما با موفقیت اضافه شد.');
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher->id]);
     }
 
@@ -146,7 +147,7 @@ class AdminsDashboardController extends Controller
 
         DB::update('UPDATE relation_ships SET userable_id = ?, lesson_id = ? WHERE id = ?', [$lesson_room, $lesson, $relation_ship->id]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'کلاس مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
     }
 
@@ -168,7 +169,7 @@ class AdminsDashboardController extends Controller
             // PNAndFinalScore::create([]); TODO: create records in p_n_and_final_scores table for new learner
         }
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'دانش آموز شما برای این کلاس با موفقیت اضافه شد.');
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room]);
     }
 
@@ -178,7 +179,7 @@ class AdminsDashboardController extends Controller
             'name' => $request->learner_name
         ]);
 
-        // TODO: add flash message
+        ShowFlashMessageController::add_flash_message('success', 'دانش آموز مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $learner->lesson_room_id]);
     }
 
