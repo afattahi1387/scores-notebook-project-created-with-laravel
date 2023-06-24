@@ -11,6 +11,13 @@
         <main>
             <div class="container-fluid px-4">
                 <h2 class="mt-4">مشاهده کلاس های: {{ $teacher->name }}</h2><br>
+                @if($errors->has('lesson_room'))
+                    <div class="alert alert-danger" style="direction: rtl;">{{ $errors->first('lesson_room') }}</div>
+                @endif
+                
+                @if($errors->has('lesson'))
+                    <div class="alert alert-danger" style="direction: rtl;">{{ $errors->first('lesson') }}</div>
+                @endif
                 @if(isset($_GET['edit-relation-ship']) && !empty($_GET['edit-relation-ship']))
                     <div class="card mb-4" style="direction: rtl;">
                         <div class="card-header">

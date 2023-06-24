@@ -53,7 +53,8 @@ class DashboardController extends Controller
             'level_of_calculate_absences' => $LOCA
         ]);
 
-        ShowFlashMessageController::add_flash_message('success', 'تنظیمات شما با موفقیت ویرایش شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'تنظیمات شما با موفقیت ویرایش شد.');
         return redirect()->route('teachers.settings');
     }
 
@@ -121,7 +122,8 @@ class DashboardController extends Controller
                 ]);
             }
 
-            ShowFlashMessageController::add_flash_message('success', 'تاریخ و حضور و غیاب مربوط به آن با موفقیت اضافه شد.');
+            $show_flash_message = new ShowFlashMessageController();
+            $show_flash_message->add_flash_message('success', 'تاریخ و حضور و غیاب مربوط به آن با موفقیت اضافه شد.');
             return redirect()->route('dashboard');
         }
     }
@@ -153,7 +155,9 @@ class DashboardController extends Controller
         } elseif($term == 'second') {
             $term_for_flash = 'دوم';
         }
-        ShowFlashMessageController::add_flash_message('success', sprintf('نمره مستمر داده شده در ترم %s با موفقیت ثبت شد.', $term_for_flash));
+
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', sprintf('نمره مستمر داده شده در ترم %s با موفقیت ثبت شد.', $term_for_flash));
         return redirect()->route('show.learner.information', ['learner' => $learner_id, 'relation_ship' => $relation_ship_id]);
     }
 
@@ -169,16 +173,18 @@ class DashboardController extends Controller
             $term_for_flash = 'دوم';
         }
 
-        ShowFlashMessageController::add_flash_message('success', sprintf('نمره پایانی ترم %s با موفقیت ثبت شد.', $term_for_flash));
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', sprintf('نمره پایانی ترم %s با موفقیت ثبت شد.', $term_for_flash));
         return redirect()->route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]);
     }
 
-    public function update_score(Request $request, StudentAttendance $score) { // TODO: add request
+    public function update_score(Request $request, StudentAttendance $score) {
         $score->update([
             'score' => $request->score
         ]);
 
-        ShowFlashMessageController::add_flash_message('success', 'نمره شما با موفقیت ویرایش شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'نمره شما با موفقیت ویرایش شد.');
         return redirect()->route('show.learner.information', ['learner' => $score->learner->id, 'relation_ship' => $score->relavant_roll_call()->relation_ship]);
     }
 
@@ -189,7 +195,8 @@ class DashboardController extends Controller
             'second_term_PN_number' => $request->second_term_PN_number
         ]);
 
-        ShowFlashMessageController::add_flash_message('success', 'مثبت و منفی ترم اول و دوم برای این دانش آموز با موفقیت ثبت شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'مثبت و منفی ترم اول و دوم برای این دانش آموز با موفقیت ثبت شد.');
         return redirect()->route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship_id]);
     }
 }

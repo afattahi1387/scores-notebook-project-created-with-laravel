@@ -2,7 +2,7 @@
 
 return [
 
-    'required' => 'لطفا فیلد :attribute را پر کنید',
+    'required' => 'لطفا فیلد :attribute را پر کنید.',
 
     'custom' => [
         'attribute-name' => [
@@ -11,6 +11,9 @@ return [
     ],
     
     'attributes' => [
+        'name' => 'نام',
+        'lesson_room' => 'کلاس',
+        'lesson' => 'درس',
         'username' => 'نام کاربری',
         'password' => 'رمز عبور'
     ],

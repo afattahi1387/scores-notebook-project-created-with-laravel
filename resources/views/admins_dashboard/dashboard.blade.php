@@ -4,6 +4,9 @@
         <main>
             <div class="container-fluid px-4" style="direction: rtl;">
                 <h1 class="mt-4">داشبورد</h1><br>
+                @if($errors->has('name'))
+                    <div class="alert alert-danger" style="direction: rtl;">{{ $errors->first('name') }}</div>
+                @endif
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
@@ -55,7 +58,7 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="put">
                                         <div class="input-group">
-                                            <input type="text" name="name" class="form-control" placeholder="نام کلاس" value="{{ $lesson_room_name }}" style="margin-left: 3px;" required>
+                                            <input type="text" name="name" class="form-control" placeholder="نام کلاس" value="@if(!empty(old('name'))){{ old('name') }}@else{{ $lesson_room_name }}@endif" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-warning" style="border-radius: 3px; color: white;"><i class="fas fa-edit"></i></button>
                                         </div>
                                     </form>
@@ -63,7 +66,7 @@
                                     <form action="{{ route('insert.lesson.room') }}" method="POST">
                                         {{ csrf_field() }}
                                         <div class="input-group">
-                                            <input type="text" name="name" class="form-control" placeholder="نام کلاس" style="margin-left: 3px;" required>
+                                            <input type="text" name="name" class="form-control" placeholder="نام کلاس" value="{{ old('name') }}" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </form>
@@ -89,7 +92,7 @@
                                         <div class="input-group">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="_method" value="put">
-                                            <input type="text" name="name" class="form-control" placeholder="نام درس" value="{{ $lesson_name }}" style="margin-left: 3px;" required>
+                                            <input type="text" name="name" class="form-control" placeholder="نام درس" value="@if(!empty(old('name'))){{ old('name') }}@else{{ $lesson_name }}@endif" style="margin-left: 3px;" required>
                                             <button type="submit" class="btn btn-warning" style="border-radius: 3px; color: white;"><i class="fas fa-edit"></i></button>
                                         </div>
                                     </form>
@@ -97,7 +100,7 @@
                                         <form action="{{ route('insert.lesson') }}" method="POST">
                                             {{ csrf_field() }}
                                             <div class="input-group">
-                                                <input type="text" name="name" class="form-control" placeholder="نام درس" style="margin-left: 3px;" required>
+                                                <input type="text" name="name" class="form-control" placeholder="نام درس" value="{{ old('name') }}" style="margin-left: 3px;" required>
                                                 <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i></button>
                                             </div>
                                         </form>
@@ -134,9 +137,21 @@
                                 @else
                                     <form action="{{ route('insert.teacher') }}" method="POST">
                                         {{ csrf_field() }}
-                                        <input type="text" name="name" class="form-control" placeholder="نام دبیر"><br>
-                                        <input type="text" name="username" placeholder="نام کاربری" class="form-control"><br>
-                                        <input type="password" name="password" placeholder="رمز عبور" class="form-control"><br>
+                                        <input type="text" name="name" class="form-control" placeholder="نام دبیر" value="{{ old('name') }}">
+                                        @if($errors->has('name'))
+                                            <span class="text-danger">{{ $errors->first('name') }}</span><br>
+                                        @endif
+                                        <br>
+                                        <input type="text" name="username" placeholder="نام کاربری" value="{{ old('username') }}" class="form-control">
+                                        @if($errors->has('username'))
+                                            <span class="text-danger">{{ $errors->first('username') }}</span><br>
+                                        @endif
+                                        <br>
+                                        <input type="password" name="password" placeholder="رمز عبور" class="form-control">
+                                        @if($errors->has('password'))
+                                            <span class="text-danger">{{ $errors->first('password') }}</span><br>
+                                        @endif
+                                        <br>
                                         <button type="submit" class="btn btn-success" style="border-radius: 3px;"><i class="fas fa-plus"></i> افزودن دبیر</button>
                                     </form>
                                 @endif

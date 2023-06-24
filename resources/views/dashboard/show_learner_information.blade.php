@@ -23,7 +23,7 @@
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="put">
                                     <div class="input-group">
-                                        <input type="number" name="score" placeholder="نمره گرفته شده" value="{{ $score_for_edit->score }}" class="form-control" style="margin-left: 3px;">
+                                        <input type="number" name="score" placeholder="نمره گرفته شده" value="{{ $score_for_edit->score }}" class="form-control" style="margin-left: 3px;" required>
                                         <button type="submit" class="btn btn-warning" style="margin-left: 3px; color: white; border-radius: 3px;"><i class="fas fa-edit"></i></button>
                                         <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship->id]) }}" class="btn btn-danger"><i class="fas fa-times"></i></a>
                                     </div>

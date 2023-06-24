@@ -11,7 +11,7 @@
 - [ ] change pages direction.
 - [x] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
-- [ ] Show validations in forms.
+- [ ] Set requests and Show validations for add date, add teacher, edit learner and edit teacher.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
 - [ ] added flash messages to project.

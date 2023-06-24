@@ -104,7 +104,8 @@ class AdminsDashboardController extends Controller
             'user_id' => $new_user->id
         ]);
 
-        ShowFlashMessageController::add_flash_message('success', 'دبیر جدید با موفقیت اضافه شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'دبیر جدید با موفقیت اضافه شد.');
         return redirect()->route('admins.dashboard');
     }
 
@@ -129,14 +130,16 @@ class AdminsDashboardController extends Controller
             'password' => $new_password
         ]);
 
-        ShowFlashMessageController::add_flash_message('success', 'دبیر مورد نظر شما با موفقیت ویرایش شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'دبیر مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('admins.dashboard');
     }
 
     public function insert_relation_ship(AddRelationShipRequest $request, User $teacher) {
         DB::insert('INSERT INTO relation_ships VALUES (NULL, ?, ?, ?, ?)', [$teacher->id, $request->lesson_room, 'App\LessonRoom', $request->lesson]);
 
-        ShowFlashMessageController::add_flash_message('success', 'کلاس مورد نظر شما با موفقیت اضافه شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'کلاس مورد نظر شما با موفقیت اضافه شد.');
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher->id]);
     }
 
@@ -147,7 +150,8 @@ class AdminsDashboardController extends Controller
 
         DB::update('UPDATE relation_ships SET userable_id = ?, lesson_id = ? WHERE id = ?', [$lesson_room, $lesson, $relation_ship->id]);
 
-        ShowFlashMessageController::add_flash_message('success', 'کلاس مورد نظر شما با موفقیت ویرایش شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'کلاس مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
     }
 
@@ -167,9 +171,10 @@ class AdminsDashboardController extends Controller
             ]);
 
             // PNAndFinalScore::create([]); TODO: create records in p_n_and_final_scores table for new learner
-        }
 
-        ShowFlashMessageController::add_flash_message('success', 'دانش آموز شما برای این کلاس با موفقیت اضافه شد.');
+        }
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'دانش آموز شما برای این کلاس با موفقیت اضافه شد.');
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room]);
     }
 
@@ -179,19 +184,18 @@ class AdminsDashboardController extends Controller
             'name' => $request->learner_name
         ]);
 
-        ShowFlashMessageController::add_flash_message('success', 'دانش آموز مورد نظر شما با موفقیت ویرایش شد.');
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'دانش آموز مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $learner->lesson_room_id]);
     }
 
     public function show_students_list(LessonRoom $lesson_room) {
-        dd('salam');
-        // TODO: set it
-        // if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner'])) {
-        //     $learner_for_edit = Learner::find($_GET['edit-learner']);
-        // } else {
-        //     $learner_for_edit = '';
-        // }
-        // return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'learner_for_edit' => $learner_for_edit]);
+        if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner'])) {
+            $learner_for_edit = Learner::find($_GET['edit-learner']);
+        } else {
+            $learner_for_edit = '';
+        }
+        return view('admins_dashboard.show_students_list_for_admin', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'learner_for_edit' => $learner_for_edit]);
     }
 
     public function show_teacher_classes(User $teacher) {
