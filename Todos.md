@@ -17,7 +17,7 @@
 - [ ] added flash messages to project.
 - [ ] after edit teacher.
 - [ ] Add request to insert learner
-- [ ] Add pages icons.
+- [x] Add pages icons.
 - [ ] Change redirect to /home in login page if user is authenticated.
 - [ ] Set APP_DEBUG 'true' in .env file.
 - [ ] Add request for edit final scores and edit scores.

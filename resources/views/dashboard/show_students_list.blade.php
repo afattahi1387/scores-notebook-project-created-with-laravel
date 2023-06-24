@@ -1,5 +1,7 @@
 @extends('includes.dashboard_html_structure')
 
+@section('icon', 'students.jpg')
+
 @section('title')
 نمایش لیست دانش آموزان کلاس: {{ $lesson_room->name }}
 @endsection

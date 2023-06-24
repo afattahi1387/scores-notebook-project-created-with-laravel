@@ -1,5 +1,7 @@
 @extends('includes.dashboard_html_structure')
 
+@section('icon', 'students.jpg')
+
 @section('title')
 مشاهده کلاس های: {{ $teacher->name }}
 @endsection

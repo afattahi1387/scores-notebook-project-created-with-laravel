@@ -1,5 +1,7 @@
 @extends('includes.dashboard_html_structure')
 
+@section('icon', 'add.jpg')
+
 @section('title')
 افزودن تاریخ برای: {{ $lesson_room->name }} - {{ $lesson->name }}
 @endsection

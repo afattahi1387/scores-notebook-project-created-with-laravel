@@ -1,5 +1,7 @@
 @extends('includes.dashboard_html_structure')
 
+@section('icon', 'settings.png')
+
 @section('title', 'تنظیمات')
 
 @section('content')
