@@ -24,7 +24,15 @@ class AdminsDashboardController extends Controller
         $this->middleware('auth');
     }
 
+    public function redirect_to_teachers_dashboard() {
+        if(auth()->user()->type == 'teacher') {
+            return redirect()->route('dashboard');
+        }
+    }
+
     public function admins_dashboard() {
+        self::redirect_to_teachers_dashboard();
+
         $lesson_rooms = LessonRoom::all();
         $lessons = Lesson::all();
         $teachers = User::where('type', 'teacher')->orderBy('id', 'DESC')->get();
@@ -50,7 +58,15 @@ class AdminsDashboardController extends Controller
         return view('admins_dashboard.dashboard', ['lesson_rooms' => $lesson_rooms, 'lessons' => $lessons, 'lesson_room_name' => $lesson_room_name, 'lesson_name' => $lesson_name, 'teachers' => $teachers, 'teacher_row' => $teacher_row]);
     }
 
+    public function restore_project_page() {
+        self::redirect_to_teachers_dashboard();
+
+        return view('admins_dashboard.restore_project_page');
+    }
+
     public function insert_lesson_room(AddAndEditNameRequest $request) {
+        self::redirect_to_teachers_dashboard();
+
         $name = $request->name;
         LessonRoom::create([
             'name' => $name
@@ -60,6 +76,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function update_lesson_room(AddAndEditNameRequest $request, LessonRoom $lesson_room) {
+        self::redirect_to_teachers_dashboard();
+
         $name = $request->name;
         $lesson_room->update([
             'name' => $name
@@ -69,6 +87,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function insert_lesson(AddAndEditNameRequest $request) {
+        self::redirect_to_teachers_dashboard();
+
         $name = $request->name;
         Lesson::create([
             'name' => $name
@@ -78,6 +98,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function update_lesson(AddAndEditNameRequest $request, Lesson $lesson) {
+        self::redirect_to_teachers_dashboard();
+        
         $name = $request->name;
         $lesson->update([
             'name' => $name
@@ -87,6 +109,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function insert_teacher(AddTeacherRequest $request) {
+        self::redirect_to_teachers_dashboard();
+        
         // $user = User::where('password', bcrypt($request->password))->get();
 
         $name = $request->name;
@@ -110,6 +134,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function update_teacher(EditTeacherRequest $request, User $teacher) {
+        self::redirect_to_teachers_dashboard();
+        
         // $user = User::where('password', bcrypt($request->password))->get();
         $name = $request->name;
         $username = $request->username;
@@ -136,6 +162,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function insert_relation_ship(AddRelationShipRequest $request, User $teacher) {
+        self::redirect_to_teachers_dashboard();
+        
         DB::insert('INSERT INTO relation_ships VALUES (NULL, ?, ?, ?, ?)', [$teacher->id, $request->lesson_room, 'App\LessonRoom', $request->lesson]);
 
         $show_flash_message = new ShowFlashMessageController();
@@ -144,6 +172,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function update_relation_ship(AddRelationShipRequest $request, RelationShip $relation_ship) {
+        self::redirect_to_teachers_dashboard();
+        
         $lesson_room = $request->lesson_room;
         $lesson = $request->lesson;
         $teacher_id = $relation_ship->user_id;
@@ -156,6 +186,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function insert_learners_for_lesson_room(Request $requests, $lesson_room) { // TODO: add request
+        self::redirect_to_teachers_dashboard();
+        
         $keys = [];
         foreach($requests->all() as $key => $request) {
             if(substr($key, 0, 12) == 'learner_row_') {
@@ -185,6 +217,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function update_learner(EditLearnerRequest $request, Learner $learner) {
+        self::redirect_to_teachers_dashboard();
+        
         $learner->update([
             'row' => $request->learner_row,
             'name' => $request->learner_name
@@ -196,6 +230,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function show_students_list(LessonRoom $lesson_room) {
+        self::redirect_to_teachers_dashboard();
+        
         if(isset($_GET['edit-learner']) && !empty($_GET['edit-learner'])) {
             $learner_for_edit = Learner::find($_GET['edit-learner']);
         } else {
@@ -205,6 +241,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function show_teacher_classes(User $teacher) {
+        self::redirect_to_teachers_dashboard();
+        
         $classes = $teacher->lesson_rooms(false, true);
         $lesson_rooms = LessonRoom::all();
         $lessons = Lesson::all();
