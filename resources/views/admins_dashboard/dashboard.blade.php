@@ -70,7 +70,11 @@
                                     <br>
                                     <ul>
                                         @foreach($lessons as $lesson)
-                                            <li>{{ $lesson->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson={{ $lesson->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
+                                            <li>{{ $lesson->name }} | <a href="{{ route('admins.dashboard') }}?edit-lesson={{ $lesson->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;" onclick="if(confirm('آیا از حذف این درس مطمئن هستید؟ در اینصورت تمامی کلاس های مربوط به این درس حذف خواهند شد.')){document.getElementById('delete_lesson_{{ $lesson->id }}_form').submit();}">حذف</span></li>
+                                            <form action="{{ route('delete.lesson', ['lesson' => $lesson->id]) }}" method="POST" id="delete_lesson_{{ $lesson->id }}_form">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="delete">
+                                            </form>
                                         @endforeach
                                     </ul>
                                 </form>

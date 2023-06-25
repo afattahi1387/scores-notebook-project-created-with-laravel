@@ -131,6 +131,19 @@ class AdminsDashboardController extends Controller
         return redirect()->route('admins.dashboard');
     }
 
+    public function delete_lesson(Lesson $lesson) {
+        self::redirect_to_teachers_dashboard();
+
+        foreach($lesson->relation_ships as $relation_ship) {
+            self::delete_relation_ship($relation_ship, false);
+        }
+
+        $lesson->delete();
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'درس مورد نظر شما با موفقیت حذف شد.');
+        return redirect()->route('admins.dashboard');
+    }
+
     public function insert_teacher(AddTeacherRequest $request) {
         self::redirect_to_teachers_dashboard();
         
@@ -208,7 +221,9 @@ class AdminsDashboardController extends Controller
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
     }
 
-    public function delete_relation_ship(RelationShip $relation_ship) {
+    public function delete_relation_ship(RelationShip $relation_ship, $show_flash_message_and_redirect = true) {
+        self::redirect_to_teachers_dashboard();
+
         $teacher_id = $relation_ship->user_id;
 
         foreach($relation_ship->roll_calls as $roll_call) {
@@ -220,9 +235,11 @@ class AdminsDashboardController extends Controller
         }
 
         $relation_ship->delete();
-        $show_flash_message = new ShowFlashMessageController();
-        $show_flash_message->add_flash_message('success', 'کلاس مورد نظر شما با موفقیت حذف شد.');
-        return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
+        if($show_flash_message_and_redirect) {
+            $show_flash_message = new ShowFlashMessageController();
+            $show_flash_message->add_flash_message('success', 'کلاس مورد نظر شما با موفقیت حذف شد.');
+            return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
+        }
     }
 
     public function insert_learners_for_lesson_room(Request $requests, $lesson_room) { // TODO: add request
@@ -270,6 +287,8 @@ class AdminsDashboardController extends Controller
     }
 
     public function delete_learner(Learner $learner, $show_flash_message_and_redirect = true) {
+        self::redirect_to_teachers_dashboard();
+
         $lesson_room_id = $learner->lesson_room->id;
         foreach(PNAndFinalScore::where('learner_id', $learner->id) as $pn_and_final_score) {
             $pn_and_final_score->delete();
@@ -277,7 +296,7 @@ class AdminsDashboardController extends Controller
 
         $learner->delete();
 
-        if($show_flash_message_and_redirect == true) {
+        if($show_flash_message_and_redirect) {
             $show_flash_message = new ShowFlashMessageController();
             $show_flash_message->add_flash_message('success', 'دانش آموز مورد نظر شما با موفقیت حذف شد.');
             return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room_id]);
