@@ -101,7 +101,7 @@
                                                 <form action="{{ route('delete.relation.ship', ['relation_ship' => $class->id]) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     <input type="hidden" name="_method" value="delete">
-                                                    <button class="btn btn-danger" onclick="if(confirm('آیا از حذف این کلاس مطمئن هستید؟')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
+                                                    <button class="btn btn-danger" onclick="if(confirm('آیا از حذف این کلاس مطمئن هستید؟ در اینصورت تمامی حضور و غیاب ها و نمرات مربوط به این کلاس حذف خواهند شد.')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
                                                 </form>
                                             </div>
                                         </td>
