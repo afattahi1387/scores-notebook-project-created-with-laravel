@@ -1,21 +1,19 @@
-- [ ] check migrations.
 - [x] change add PN in add date page.
 - [ ] find hash for register user.
-- [ ] no access to dashboards.
-- [ ] set redirect to dashboard.
-- [ ] delete work additions.
+- [x] no access to dashboards. ===> I did; but it doesn't work. TEST IT
+- [x] set redirect to dashboard. ===> I did; but it doesn't work. TEST IT
+- [x] delete work additions.
 - [x] seperate admins dashboard html structure and teachers dashboard html structure.
 - [x] check fontawesome icons and labels.
-- [ ] change pages direction.
 - [x] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
 - [ ] Set requests and Show validations for add date, add teacher, edit learner and edit teacher and all requests.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
-- [ ] added flash messages to project.
+- [x] added flash messages to project. ===> I did; but it doesn't work. TEST IT
 - [ ] after edit teacher.
 - [x] Add pages icons.
-- [ ] Change redirect to /home in login page if user is authenticated.
+- [x] Change redirect to /home in login page if user is authenticated.
 - [ ] Set APP_DEBUG 'true' in .env file.
 - [ ] Show values in teacher_settings table in teacher_settings.blade.php file.
 - [ ] مشاهده اطلاعات دانش آموز باید برای ادمین محدود باشد.
@@ -27,3 +25,5 @@
 - [ ] Set flashed messages.
 - [x] Add HTTP errors.
 - [ ] Check all 'TODO:'
+- [ ] Add view date information.
+- [ ] Check insert date function; because a bug exists.
