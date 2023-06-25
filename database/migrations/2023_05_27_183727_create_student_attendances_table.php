@@ -19,7 +19,7 @@ class CreateStudentAttendancesTable extends Migration
             $table->foreign('roll_call_id')->references('id')->on('roll_calls')->onDelete('cascade');
             $table->unsignedBigInteger('learner_id');
             $table->foreign('learner_id')->references('id')->on('learners')->onDelete('cascade');
-            $table->string('roll_call');
+            $table->string('roll_call')->nullable();
             $table->integer('score')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();

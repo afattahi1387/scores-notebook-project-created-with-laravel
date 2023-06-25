@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
     public function teachers_settings() {
         self::redirect_to_admins_dashboard();
-        
+
         if(auth()->user()->type != 'teacher') {
             return redirect()->route('admins.dashboard');
         }
@@ -68,18 +68,19 @@ class DashboardController extends Controller
 
     public function add_date(LessonRoom $lesson_room, Lesson $lesson) {
         self::redirect_to_admins_dashboard();
-        
+
         $lesson_room_learners = $lesson_room->learners;
         return view('dashboard.add_date', ['lesson_room' => $lesson_room, 'lesson' => $lesson, 'lesson_room_learners' => $lesson_room_learners]);
     }
 
     public function insert_date(AddDateRequest $request, LessonRoom $lesson_room, Lesson $lesson) {
         self::redirect_to_admins_dashboard();
-        
+
         $day = $request->day_number < 10 ? '0' . $request->day_number : $request->day_number;
         $month = $request->month_number < 10 ? '0' . $request->month_number : $request->month_number;
         $year = $request->year_number < 10 ? '0' . $request->year_number : $request->year_number;
         $term = $request->term;
+        $date_description = $request->date_description;
         $lesson_room_learners = $lesson_room->learners;
         $roll_calls = array();
         $scores = array();
@@ -87,7 +88,11 @@ class DashboardController extends Controller
         $descriptions = array();
 
         foreach($lesson_room_learners as $learner) {
-            $roll_calls[$learner->id] = $request['roll_call_' . $learner->id];
+            if(empty($request['roll_call_' . $learner->id])) {
+                $roll_calls[$learner->id] = null;
+            } else {
+                $roll_calls[$learner->id] = $request['roll_call_' . $learner->id];
+            }
 
             if(empty($request['score_' . $learner->id])) {
                 $scores[$learner->id] = null;
@@ -113,6 +118,7 @@ class DashboardController extends Controller
         $new_roll_call = RollCall::create([
             'date' => $year . '/' . $month . '/' . $day,
             'term' => $term,
+            'date_description' => $date_description,
             'relation_ship_id' => $relation_ship->id
         ]);
 
@@ -142,14 +148,14 @@ class DashboardController extends Controller
 
     public function show_students_list(LessonRoom $lesson_room, Lesson $lesson) {
         self::redirect_to_admins_dashboard();
-        
+
         $relation_ship_id = RelationShip::where('user_id', auth()->user()->id)->where('userable_id', $lesson_room->id)->where('userable_type', 'App\LessonRoom')->where('lesson_id', $lesson->id)->get()[0]['id'];
         return view('dashboard.show_students_list', ['lesson_room' => $lesson_room, 'learners' => $lesson_room->learners, 'relation_ship_id' => $relation_ship_id]);
     }
 
     public function show_learner_information(Learner $learner, RelationShip $relation_ship) {
         self::redirect_to_admins_dashboard();
-        
+
         $roll_calls = RollCall::where('relation_ship_id', $relation_ship->id)->get();
         $attendances = array();
         foreach($roll_calls as $roll_call) {
@@ -162,7 +168,7 @@ class DashboardController extends Controller
 
     public function update_term_development_score(Request $request, $learner_id, $relation_ship_id, $term) {
         self::redirect_to_admins_dashboard();
-        
+
         $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship_id)->where('learner_id', $learner_id)->get()[0];
         $p_n_and_final_score->update([
             $term . '_term_development_score' => $request['edit_term_development_score']
@@ -181,7 +187,7 @@ class DashboardController extends Controller
 
     public function update_term_final_score(Request $request, Learner $learner, RelationShip $relation_ship, $term) {
         self::redirect_to_admins_dashboard();
-        
+
         $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship->id)->where('learner_id', $learner->id)->get()[0];
         $p_n_and_final_score->update([
             $term . '_term_final_score' => $request->term_final_score
@@ -200,7 +206,7 @@ class DashboardController extends Controller
 
     public function update_score(Request $request, StudentAttendance $score) {
         self::redirect_to_admins_dashboard();
-        
+
         $score->update([
             'score' => $request->score
         ]);
@@ -212,7 +218,7 @@ class DashboardController extends Controller
 
     public function change_pn_number(Request $request, Learner $learner, $relation_ship_id) {
         self::redirect_to_admins_dashboard();
-        
+
         $p_n_and_final_score = PNAndFinalScore::where('relation_ship_id', $relation_ship_id)->where('learner_id', $learner->id)->get()[0];
         $p_n_and_final_score->update([
             'first_term_PN_number' => $request->first_term_PN_number,

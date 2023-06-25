@@ -30,8 +30,10 @@
                                 <option value="">ترم خود را وارد کنید</option>
                                 <option value="first">نوبت اول</option>
                                 <option value="second">نوبت دوم</option>
-                            </select>
-                            
+                            </select><br>
+                            <textarea name="date_description" id="date_description" rows="10" placeholder="توضیحات برای این تاریخ" class="form-control"></textarea>
+                            <hr>
+                            <div class="alert alert-primary"><h4>توجه: اطلاعات زیر اختیاری می باشند و شما می توانید آنها را خالی بگذارید.</h4></div>
                             @foreach ($lesson_room_learners as $learner)
                                 <hr>
                                 <div class="alert alert-primary" role="alert">
@@ -52,6 +54,20 @@
         </main>
     </div>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#date_description',
+            directionality: 'rtl',
+            plugins: [
+            'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+            'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+            'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+            ],
+            toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+            'alignleft aligncenter alignright alignjustify | ' +
+            'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+        });
+    </script>
     @foreach ($lesson_room_learners as $learner)
         <script>
             tinymce.init({
