@@ -36,7 +36,11 @@
                                 <br>
                                 <ul>
                                     @foreach($lesson_rooms as $lesson_room)
-                                        <li>{{ $lesson_room->name }} | <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}" class="text-primary">مشاهده لیست دانش آموزان</a> | <a href="{{ route('admins.dashboard') }}?edit-lesson-room={{ $lesson_room->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
+                                        <li>{{ $lesson_room->name }} | <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}" class="text-primary">مشاهده لیست دانش آموزان</a> | <a href="{{ route('admins.dashboard') }}?edit-lesson-room={{ $lesson_room->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;" onclick="if(confirm('آیا از حذف این کلاس درس مطمئن هستید؟ در این صورت تمامی کلاس های مربوط به دبیران، دانش آموزان، حضور و غیاب ها و نمرات حذف خواهند شد.')){document.getElementById('delete_lesson_room_{{ $lesson_room->id }}_form').submit();}">حذف</span></li>
+                                        <form action="{{ route('delete.lesson.room', ['lesson_room' => $lesson_room->id]) }}" method="POST" id="delete_lesson_room_{{ $lesson_room->id }}_form">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="delete">
+                                        </form>
                                     @endforeach
                                 </ul>
                             </div>

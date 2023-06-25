@@ -66,6 +66,8 @@ Route::prefix('admins')->group(function() {
 
     Route::put('/update-lesson-room/{lesson_room}', 'AdminsDashboardController@update_lesson_room')->name('update.lesson.room');
 
+    Route::delete('/delete-lesson-room/{lesson_room}', 'AdminsDashboardController@delete_lesson_room')->name('delete.lesson.room');
+
     Route::post('/insert-lesson', 'AdminsDashboardController@insert_lesson')->name('insert.lesson');
 
     Route::put('/update-lesson/{lesson}', 'AdminsDashboardController@update_lesson')->name('update.lesson');

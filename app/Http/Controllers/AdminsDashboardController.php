@@ -109,6 +109,23 @@ class AdminsDashboardController extends Controller
         return redirect()->route('admins.dashboard');
     }
 
+    public function delete_lesson_room(LessonRoom $lesson_room) {
+        self::redirect_to_teachers_dashboard();
+
+        foreach($lesson_room->relation_ships() as $relation_ship) {
+            self::delete_relation_ship($relation_ship, false);
+        }
+
+        foreach($lesson_room->learners as $learner) {
+            self::delete_learner($learner, false);
+        }
+
+        $lesson_room->delete();
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'کلاس درس مورد نظر شما با موفقیت حذف شد.');
+        return redirect()->route('admins.dashboard');
+    }
+
     public function insert_lesson(AddAndEditNameRequest $request) {
         self::redirect_to_teachers_dashboard();
 

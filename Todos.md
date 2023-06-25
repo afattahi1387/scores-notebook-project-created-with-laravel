@@ -6,7 +6,7 @@
 - [x] seperate admins dashboard html structure and teachers dashboard html structure.
 - [x] check fontawesome icons and labels.
 - [x] change dashboards sidebar.
-- [ ] create delete lesson rooms and teachers and roll calls and students attendances in admins dashboard.
+- [ ] create delete teachers and roll calls and students attendances in admins dashboard.
 - [ ] Set requests and Show validations for add teacher, edit learner and edit teacher and all requests.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
