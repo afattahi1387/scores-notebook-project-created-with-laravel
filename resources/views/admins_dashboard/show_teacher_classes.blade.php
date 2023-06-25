@@ -96,7 +96,14 @@
                                         <td>@php echo ++$counter; @endphp</td>
                                         <td>{{ $class['class_name'] }} - {{ $class['lesson_name'] }}</td>
                                         <td>
-                                            <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}?edit-relation-ship={{ $class->id }}" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></a>
+                                            <div class="d-flex">
+                                                <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}?edit-relation-ship={{ $class->id }}" class="btn btn-warning" style="color: white; margin-right: 3px;"><i class="fas fa-edit"></i></a>
+                                                <form action="{{ route('delete.relation.ship', ['relation_ship' => $class->id]) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    <button class="btn btn-danger" onclick="if(confirm('آیا از حذف این کلاس مطمئن هستید؟')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

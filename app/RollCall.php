@@ -11,4 +11,8 @@ class RollCall extends Model
     public function relation_ship() {
         return $this->belongsTo(RelationShip::class);
     }
+
+    public function student_attendances() {
+        return $this->hasMany(StudentAttendance::class);
+    }
 }

@@ -12,6 +12,10 @@ class Learner extends Model
 {
     protected $fillable = ['row', 'name', 'lesson_room_id', 'first_term_PN_number', 'second_term_PN_number', 'first_term_final_scores', 'second_term_final_scores'];
 
+    public function lesson_room() {
+        return $this->belongsTo(LessonRoom::class);
+    }
+
     public function get_p_n_and_final_score() {
         return PNAndFinalScore::where('learner_id', $this->id)->get()[0];
     }

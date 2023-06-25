@@ -99,7 +99,14 @@
                                         <td>{{ $learner->name }}</td>
                                         <td>
                                             {{-- <a href="{{ route('show.learner.information', ['learner' => $learner->id, 'relation_ship' => $relation_ship_id]) }}" class="btn btn-primary">مشاهده اطلاعات دانش آموز</a> --}}{{-- TODO: set it --}}
-                                            <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}?edit-learner={{ $learner->id }}" class="btn btn-warning" style="color: white;"><i class="fas fa-edit"></i></a>
+                                            <div class="d-flex">
+                                                <a href="{{ route('show.students.list.for.admins', ['lesson_room' => $lesson_room->id]) }}?edit-learner={{ $learner->id }}" class="btn btn-warning" style="color: white; margin-right: 3px;"><i class="fas fa-edit"></i></a>
+                                                <form action="{{ route('delete.learner', ['learner' => $learner->id]) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    <button class="btn btn-danger" onclick="if(confirm('آیا از حذف این دانش آموز مطمئن هستید؟')){return true;}else{return false;}"><i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

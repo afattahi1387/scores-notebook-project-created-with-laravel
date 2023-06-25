@@ -208,6 +208,23 @@ class AdminsDashboardController extends Controller
         return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
     }
 
+    public function delete_relation_ship(RelationShip $relation_ship) {
+        $teacher_id = $relation_ship->user_id;
+
+        foreach($relation_ship->roll_calls as $roll_call) {
+            foreach($roll_call->student_attendances as $student_attendance) {
+                $student_attendance->delete();
+            }
+
+            $roll_call->delete();
+        }
+
+        $relation_ship->delete();
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'کلاس مورد نظر شما با موفقیت حذف شد.');
+        return redirect()->route('show.teacher.classes', ['teacher' => $teacher_id]);
+    }
+
     public function insert_learners_for_lesson_room(Request $requests, $lesson_room) { // TODO: add request
         self::redirect_to_teachers_dashboard();
         
@@ -250,6 +267,21 @@ class AdminsDashboardController extends Controller
         $show_flash_message = new ShowFlashMessageController();
         $show_flash_message->add_flash_message('success', 'دانش آموز مورد نظر شما با موفقیت ویرایش شد.');
         return redirect()->route('show.students.list.for.admins', ['lesson_room' => $learner->lesson_room_id]);
+    }
+
+    public function delete_learner(Learner $learner, $show_flash_message_and_redirect = true) {
+        $lesson_room_id = $learner->lesson_room->id;
+        foreach(PNAndFinalScore::where('learner_id', $learner->id) as $pn_and_final_score) {
+            $pn_and_final_score->delete();
+        }
+
+        $learner->delete();
+
+        if($show_flash_message_and_redirect == true) {
+            $show_flash_message = new ShowFlashMessageController();
+            $show_flash_message->add_flash_message('success', 'دانش آموز مورد نظر شما با موفقیت حذف شد.');
+            return redirect()->route('show.students.list.for.admins', ['lesson_room' => $lesson_room_id]);
+        }
     }
 
     public function show_students_list(LessonRoom $lesson_room) {

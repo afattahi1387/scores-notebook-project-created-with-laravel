@@ -6,7 +6,7 @@
 - [x] seperate admins dashboard html structure and teachers dashboard html structure.
 - [x] check fontawesome icons and labels.
 - [x] change dashboards sidebar.
-- [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
+- [ ] create delete lesson rooms and lessons and teachers and roll calls and students attendances in admins dashboard.
 - [ ] Set requests and Show validations for add teacher, edit learner and edit teacher and all requests.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
@@ -20,9 +20,8 @@
 - [ ] Add charts.
 - [x] change p_n_...... table name.
 - [ ] Added change absents for learner in show learner information page for teachers.
-- [ ] Set insert records to p_n_and_final_scores table.
+- [x] Set insert records to p_n_and_final_scores table.
 - [x] Set restore project database. ===> TEST IT
-- [ ] Set flashed messages.
 - [x] Add HTTP errors.
 - [ ] Check all 'TODO:'
 - [ ] Add view date information.

@@ -78,9 +78,13 @@ Route::prefix('admins')->group(function() {
 
     Route::put('/update-relation-ship/{relation_ship}', 'AdminsDashboardController@update_relation_ship')->name('update.relation.ship');
 
+    Route::delete('/delete-relation-ship/{relation_ship}', 'AdminsDashboardController@delete_relation_ship')->name('delete.relation.ship');
+
     Route::post('/insert-learners-for-lesson-room/{lesson_room}', 'AdminsDashboardController@insert_learners_for_lesson_room')->name('insert.learners.for.lesson.room');
 
     Route::put('/update-learner/{learner}', 'AdminsDashboardController@update_learner')->name('update.learner');
+
+    Route::delete('/delete-learner/{learner}', 'AdminsDashboardController@delete_learner')->name('delete.learner');
 
     Route::get('/show-students-list/{lesson_room}', 'AdminsDashboardController@show_students_list')->name('show.students.list.for.admins');
 
