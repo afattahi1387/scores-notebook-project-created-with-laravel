@@ -80,7 +80,7 @@ class DashboardController extends Controller
         $month = $request->month_number < 10 ? '0' . $request->month_number : $request->month_number;
         $year = $request->year_number < 10 ? '0' . $request->year_number : $request->year_number;
         $term = $request->term;
-        $date_description = $request->date_description;
+        $date_description = !empty($request->date_description) ? $request->date_description : null;
         $lesson_room_learners = $lesson_room->learners;
         $roll_calls = array();
         $scores = array();

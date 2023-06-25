@@ -24,7 +24,10 @@ class AddDateRequest extends FormRequest
     public function rules()
     {
         return [
-            //'day_number' => 'digits_between:1,31'
+            'day_number' => 'required|min:1|max:31',
+            'month_number' => 'required|min:1|max:31',
+            'year_number' => 'required|min:1|max:31',
+            'term' => 'required'
         ];
     }
 }

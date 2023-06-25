@@ -25,15 +25,29 @@
                             <input type="number" name="month_number" id="month_number" placeholder="ماه">
                             <b>/</b>
                             <input type="number" name="year_number" id="year_number" placeholder="سال">
-                            <br><br>
+                            <br>
+                            @if($errors->has('day_number'))
+                                <span class="text-danger">{{ $errors->first('day_number') }}</span><br>
+                            @endif
+                            @if($errors->has('month_number'))
+                                <span class="text-danger">hello</span><br>
+                            @endif
+                            @if($errors->has('year_number'))
+                                <span class="text-danger">fafag</span><br>
+                            @endif
+                            <br>
                             <select name="term" class="form-control">
                                 <option value="">ترم خود را وارد کنید</option>
                                 <option value="first">نوبت اول</option>
                                 <option value="second">نوبت دوم</option>
-                            </select><br>
+                            </select>
+                            @if($errors->has('term'))
+                                <span class="text-danger">{{ $errors->first('term') }}</span><br>
+                            @endif
+                            <br>
                             <textarea name="date_description" id="date_description" rows="10" placeholder="توضیحات برای این تاریخ" class="form-control"></textarea>
                             <hr>
-                            <div class="alert alert-primary"><h4>توجه: اطلاعات زیر اختیاری می باشند و شما می توانید آنها را خالی بگذارید.</h4></div>
+                            <div class="alert alert-primary"><h5>توجه: اطلاعات زیر اختیاری می باشند و شما می توانید آنها را خالی بگذارید.</h5></div>
                             @foreach ($lesson_room_learners as $learner)
                                 <hr>
                                 <div class="alert alert-primary" role="alert">

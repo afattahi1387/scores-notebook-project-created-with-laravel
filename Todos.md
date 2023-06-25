@@ -7,7 +7,7 @@
 - [x] check fontawesome icons and labels.
 - [x] change dashboards sidebar.
 - [ ] create delete lesson rooms and lessons and relation ships and learners in admins dashboard.
-- [ ] Set requests and Show validations for add date, add teacher, edit learner and edit teacher and all requests.
+- [ ] Set requests and Show validations for add teacher, edit learner and edit teacher and all requests.
 - [ ] set .env file.
 - [ ] check user exists in insert and update teachers.
 - [x] added flash messages to project. ===> I did; but it doesn't work. TEST IT

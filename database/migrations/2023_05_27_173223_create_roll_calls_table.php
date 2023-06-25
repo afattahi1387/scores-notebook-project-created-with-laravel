@@ -17,7 +17,7 @@ class CreateRollCallsTable extends Migration
             $table->bigIncrements('id');
             $table->string('date');
             $table->string('term');
-            $table->text('date_description');
+            $table->text('date_description')->nullable();
             $table->unsignedBigInteger('relation_ship_id');
             $table->foreign('relation_ship_id')->references('id')->on('relation_ships')->onDelete('cascade');
             $table->timestamps();
