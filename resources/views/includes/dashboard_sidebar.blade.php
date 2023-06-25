@@ -8,14 +8,18 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         داشبورد
                     </a>
-                    <a class="nav-link" href="{{ route('teachers.settings') }}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
-                        تنظیمات
+                    <a class="nav-link" href="{{ route('restore.project.page') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-refresh"></i></div>
+                        بازگردانی سایت به حالت بدون اطلاعات
                     </a>
                 @elseif(auth()->user()->type == 'teacher')
                     <a class="nav-link" href="{{ route('dashboard') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         داشبورد
+                    </a>
+                    <a class="nav-link" href="{{ route('teachers.settings') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                        تنظیمات
                     </a>
                 @endif
                 <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout_form').submit();" href="{{ route('logout') }}">

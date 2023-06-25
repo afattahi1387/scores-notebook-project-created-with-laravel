@@ -11,6 +11,7 @@ use App\TeacherSetting;
 use App\PNAndFinalScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Requests\AddTeacherRequest;
 use App\Http\Requests\EditLearnerRequest;
 use App\Http\Requests\EditTeacherRequest;
@@ -62,6 +63,28 @@ class AdminsDashboardController extends Controller
         self::redirect_to_teachers_dashboard();
 
         return view('admins_dashboard.restore_project_page');
+    }
+
+    public function restore_project_function() {
+        self::redirect_to_teachers_dashboard();
+
+        $admin_name = auth()->user()->name;
+        $admin_username = auth()->user()->username;
+        $admin_password = auth()->user()->password;
+
+        Artisan::call('migrate:rollback');
+        auth()->logout();
+        Artisan::call('migrate');
+        User::create([
+            'name' => $admin_name,
+            'type' => 'admin',
+            'username' => $admin_username,
+            'password' => $admin_password
+        ]);
+
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'اطلاعات سایت شما کاملا پاک شد.');
+        return redirect()->route('admins.dashboard');
     }
 
     public function insert_lesson_room(AddAndEditNameRequest $request) {

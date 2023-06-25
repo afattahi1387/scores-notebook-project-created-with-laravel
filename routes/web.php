@@ -15,6 +15,10 @@ Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
 Route::get('/login', 'MainController@login')->name('login');
 
+Route::get('/home', function() {
+    return redirect('/');
+});
+
 Route::get('/flashed', 'ShowFlashMessageController@get_flashed_messages');
 
 Route::get('/add-flash/{message_type}/{message_text}', 'ShowFlashMessageController@add_flash_message');
@@ -53,6 +57,10 @@ Route::post('/change-pn-number/{learner}/{relation_ship_id}', 'DashboardControll
 
 Route::prefix('admins')->group(function() {
     Route::get('/dashboard', 'AdminsDashboardController@admins_dashboard')->name('admins.dashboard');
+
+    Route::get('/restore-project-page', 'AdminsDashboardController@restore_project_page')->name('restore.project.page');
+
+    Route::get('/restore-project-function', 'AdminsDashboardController@restore_project_function')->name('restore.project.function');
 
     Route::post('/insert-lesson-room', 'AdminsDashboardController@insert_lesson_room')->name('insert.lesson.room');
 

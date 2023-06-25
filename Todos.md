@@ -21,7 +21,7 @@
 - [x] change p_n_...... table name.
 - [ ] Added change absents for learner in show learner information page for teachers.
 - [ ] Set insert records to p_n_and_final_scores table.
-- [ ] Set recovery project database.
+- [x] Set restore project database. ===> TEST IT
 - [ ] Set flashed messages.
 - [x] Add HTTP errors.
 - [ ] Check all 'TODO:'
