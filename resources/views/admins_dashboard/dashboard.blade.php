@@ -90,7 +90,7 @@
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-list"></i>
+                                <i class="fas fa-chalkboard-teacher"></i>
                                 دبیران
                             </div>
                             <div class="card-body" style="direction: rtl;">
@@ -128,7 +128,11 @@
                                 <br>
                                 <ul>
                                     @foreach($teachers as $teacher)
-                                        <li>{{ $teacher->name }} | <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}" class="text-primary">مشاهده لیست کلاس ها</a> | <a href="{{ route('admins.dashboard') }}?edit-teacher={{ $teacher->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;">حذف</span></li>
+                                        <li>{{ $teacher->name }} | <a href="{{ route('show.teacher.classes', ['teacher' => $teacher->id]) }}" class="text-primary">مشاهده لیست کلاس ها</a> | <a href="{{ route('admins.dashboard') }}?edit-teacher={{ $teacher->id }}" class="text-warning">ویرایش</a> | <span class="text-danger" style="cursor: pointer;" onclick="if(confirm('آیا از حذف این دبیر مطمئن هستید؟ در اینصورت تمامی کلاس های این دبیر نیز حذف خواهند شد.')){document.getElementById('delete_teacher_{{ $teacher->id }}_form').submit();}">حذف</span></li>
+                                        <form action="{{ route('delete.teacher', ['teacher' => $teacher->id]) }}" method="POST" id="delete_teacher_{{ $teacher->id }}_form">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="delete">
+                                        </form>
                                     @endforeach
                                 </ul>
                             </div>

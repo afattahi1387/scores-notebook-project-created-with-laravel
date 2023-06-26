@@ -214,6 +214,18 @@ class AdminsDashboardController extends Controller
         return redirect()->route('admins.dashboard');
     }
 
+    public function delete_teacher(User $teacher) {
+        $teacher->teacher_settings[0]->delete();
+        foreach($teacher->relation_ships as $relation_ship) {
+            $relation_ship->delete();
+        }
+
+        $teacher->delete();
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'دبیر مورد نظر شما با موفقیت حذف شد.');
+        return redirect()->route('admins.dashboard');
+    }
+
     public function insert_relation_ship(AddRelationShipRequest $request, User $teacher) {
         self::redirect_to_teachers_dashboard();
         

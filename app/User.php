@@ -30,6 +30,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function relation_ships() {
+        return $this->hasMany(RelationShip::class);
+    }
+
+    public function teacher_settings() {
+        return $this->hasMany(TeacherSetting::class);
+    }
+
     public function lesson_rooms($get_user_authentication = true, $orderby_DESC = false) {
         if($get_user_authentication) {
             $user_id = auth()->user()->id;

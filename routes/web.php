@@ -78,6 +78,8 @@ Route::prefix('admins')->group(function() {
 
     Route::put('/update-teacher/{teacher}', 'AdminsDashboardController@update_teacher')->name('update.teacher');
 
+    Route::delete('/delete-teacher/{teacher}', 'AdminsDashboardController@delete_teacher')->name('delete.teacher');
+
     Route::post('/insert-relation-ship/{teacher}', 'AdminsDashboardController@insert_relation_ship')->name('insert.relation.ship');
 
     Route::put('/update-relation-ship/{relation_ship}', 'AdminsDashboardController@update_relation_ship')->name('update.relation.ship');
