@@ -158,6 +158,7 @@ class DashboardController extends Controller
 
         $roll_calls = RollCall::where('relation_ship_id', $relation_ship->id)->get();
         $attendances = array();
+        dd('salam');
         foreach($roll_calls as $roll_call) {
             $attendances[] = StudentAttendance::where('roll_call_id', $roll_call->id)->where('learner_id', $learner->id)->get()[0];
         }

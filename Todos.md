@@ -25,5 +25,8 @@
 - [x] Add HTTP errors.
 - [ ] Check all 'TODO:'
 - [ ] Add view date information.
-- [ ] Check insert date function; because a bug exists.
+- [ ] Check insert date function; because a bug exists and set insert date for a learner.
 - [ ] Add SMS to project.
+- [ ] Add save development and final scores together.
+- [ ] Add show learner information page for admins.
+- [ ] Solve show learner information for teachers bug.
