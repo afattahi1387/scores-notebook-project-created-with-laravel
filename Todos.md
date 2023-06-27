@@ -29,4 +29,3 @@
 - [ ] Add SMS to project.
 - [ ] Add save development and final scores together.
 - [ ] Add show learner information page for admins.
-- [ ] Solve show learner information for teachers bug.
