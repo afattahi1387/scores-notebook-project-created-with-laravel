@@ -1,0 +1,4 @@
+- [ ] Test no access to dashboards.
+- [ ] Test redirect to dashboard.
+- [ ] Test flash messages to project.
+- [ ] Test restore project database.

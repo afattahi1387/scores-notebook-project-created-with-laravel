@@ -1,0 +1,12 @@
+- [ ] create delete roll calls and students attendances in admins dashboard.
+- [ ] Set requests and Show validations for add teacher, edit learner and edit teacher and all requests.
+- [ ] check user exists in insert and update teachers.
+- [ ] after edit and delete teacher.
+- [ ] Show values in teacher_settings table in teacher_settings.blade.php file.
+- [ ] Add charts.
+- [ ] Added change absents for learner in show learner information page for teachers.
+- [ ] Check all 'TODO:'
+- [ ] Add view date information.
+- [ ] Check insert date function; because a bug exists and set insert date for a learner.
+- [ ] Add save development and final scores together.
+- [ ] Add show learner information page for admins.
