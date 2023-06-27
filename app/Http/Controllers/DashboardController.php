@@ -114,7 +114,6 @@ class DashboardController extends Controller
         }
 
         $relation_ship = RelationShip::where('userable_id', $lesson_room->id)->where('userable_type', 'App\LessonRoom')->where('lesson_id', $lesson->id)->get()[0];
-
         $new_roll_call = RollCall::create([
             'date' => $year . '/' . $month . '/' . $day,
             'term' => $term,
@@ -139,11 +138,11 @@ class DashboardController extends Controller
                     $request->term . '_term_PN_number' => $old_PN + $PNs[$learner->id]
                 ]);
             }
-
-            $show_flash_message = new ShowFlashMessageController();
-            $show_flash_message->add_flash_message('success', 'تاریخ و حضور و غیاب مربوط به آن با موفقیت اضافه شد.');
-            return redirect()->route('dashboard');
         }
+
+        $show_flash_message = new ShowFlashMessageController();
+        $show_flash_message->add_flash_message('success', 'تاریخ و حضور و غیاب مربوط به آن با موفقیت اضافه شد.');
+        return redirect()->route('dashboard');
     }
 
     public function show_students_list(LessonRoom $lesson_room, Lesson $lesson) {
